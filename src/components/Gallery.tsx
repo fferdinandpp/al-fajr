@@ -1,5 +1,5 @@
 import Thumbnail from "../assets/img/Thumbnail.png";
-// import Gallery from "../assets/img/Gallery.png"
+import Gallery from "../assets/img/Gallery.jpg"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
@@ -17,12 +17,22 @@ function App() {
             fasilitas yang kami berikan
           </p>
         </div>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center pb-10">
           <h3 className="font-semibold text-2xl pb-5">Video</h3>
           <div className="flex items-center gap-32">
             <FontAwesomeIcon icon={faChevronLeft} className="text-3xl" />
             <img src={Thumbnail} className="w-[800px]" alt="Thumbnail" />
             <FontAwesomeIcon icon={faChevronRight} className="text-3xl" />
+          </div>
+        </div>
+        <div className="flex flex-col items-center">
+          <h3 className="font-semibold text-2xl pb-5">Foto</h3>
+          <div className="grid grid-flow-col grid-rows-2 items-center gap-10">
+            <img src={Gallery} className="h-full row-span-2" alt="Gallery" />
+            <img src={Gallery} className="h-full" alt="Gallery" />
+            <img src={Gallery} className="h-full" alt="Gallery" />
+            <img src={Gallery} className="h-full" alt="Gallery" />
+            <img src={Gallery} className="h-full" alt="Gallery" />
           </div>
         </div>
       </div>

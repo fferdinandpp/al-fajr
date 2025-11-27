@@ -1,3 +1,7 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+
 function App() {
   return (
     <>
@@ -13,9 +17,12 @@ function App() {
         </div>
         <div className="flex flex-col gap-5 justify-center items-center pb-10">
           <div className="border border-black w-2/3 p-5 rounded-lg">
+          <div className="flex items-center justify-between">
             <h3 className="text-center">
               Apa saja yang termasuk dalam harga paket?
             </h3>
+            <FontAwesomeIcon icon={faChevronUp} />
+          </div>
             <p className="text-xs text-justify text-[#454545] pt-5">
               Paket ini mencakup tiket pesawat return kelas ekonomi dengan rute
               YIA – KUL – MED/JED – KUL – YIA termasuk bagasi 25 kg dan kabin 7
@@ -32,17 +39,21 @@ function App() {
               mendapatkan air Zam-zam sebanyak 5 liter.
             </p>
           </div>
-          <div className="border border-black w-2/3 p-5 rounded-lg">
+          <div className="flex items-center justify-between border border-black w-2/3 p-5 rounded-lg">
             <h3>Bagaimana Kebijakan Konfirmasi Pindah Paket / Reschedule?</h3>
+            <FontAwesomeIcon icon={faChevronDown} />
           </div>
-          <div className="border border-black w-2/3 p-5 rounded-lg">
+          <div className="flex items-center justify-between border border-black w-2/3 p-5 rounded-lg">
             <h3>Apa saja persyaratan untuk pendaftaran?</h3>
+            <FontAwesomeIcon icon={faChevronDown} />
           </div>
-          <div className="border border-black w-2/3 p-5 rounded-lg">
+          <div className="flex items-center justify-between border border-black w-2/3 p-5 rounded-lg">
             <h3>Berapa banyak orang dalam satu kelompok?</h3>
+            <FontAwesomeIcon icon={faChevronDown} />
           </div>
-          <div className="border border-black w-2/3 p-5 rounded-lg">
+          <div className="flex items-center justify-between border border-black w-2/3 p-5 rounded-lg">
             <h3>Apa kebijakan pembatalan Anda?</h3>
+            <FontAwesomeIcon icon={faChevronDown} />
           </div>
         </div>
         <div className="flex justify-center">
