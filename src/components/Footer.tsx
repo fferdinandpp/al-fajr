@@ -19,30 +19,47 @@ function App() {
               <br /> Pelayanan No. 1 di Indonesia
             </p>
             <div className="flex flex-col gap-3">
-              <div className="flex items-center gap-4">
+              <a
+                href="https://www.instagram.com/alfajrumroh/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 hover:opacity-80 transition"
+              >
                 <img
                   src={Instagram}
                   className="bg-white p-1.5 w-10 rounded-lg"
                   alt="Instagram"
                 />
                 <p className="text-lg font-semibold">@alfajrumroh</p>
-              </div>
-              <div className="flex items-center gap-4">
+              </a>
+
+              <a
+                href="https://www.youtube.com/@alfajrumroh"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 hover:opacity-80 transition"
+              >
                 <img
                   src={Youtube}
                   className="bg-white p-1.5 w-10 rounded-lg"
                   alt="Youtube"
                 />
                 <p className="text-lg font-semibold">Al Fajr Umroh</p>
-              </div>
-              <div className="flex items-center gap-4">
+              </a>
+
+              <a
+                href="https://www.tiktok.com/@alfajrumroh.indonesia"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 hover:opacity-80 transition"
+              >
                 <img
                   src={Tiktok}
                   className="bg-white p-1.5 w-10 rounded-lg"
                   alt="Tiktok"
                 />
                 <p className="text-lg font-semibold">@alfajrumroh</p>
-              </div>
+              </a>
             </div>
           </div>
           <div className="flex flex-col gap-2">
@@ -68,11 +85,11 @@ function App() {
             <p>Tangerang : Jl. Veteran No.13A, Sukasari, Kota Tangerang</p>
           </div>
         </div>
-          <div className="bg-white h-0.5 w-full"></div>
-          <p className="pt-5 text-sm">
-            Copyright © 2006 - 2023 Al Fajr Travelindo | All <br />
-            Reserverd
-          </p>
+        <div className="bg-white h-0.5 w-full"></div>
+        <p className="pt-5 text-sm">
+          Copyright © 2006 - 2023 Al Fajr Travelindo | All <br />
+          Reserverd
+        </p>
       </div>
     </>
   );

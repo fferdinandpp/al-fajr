@@ -21,25 +21,56 @@ function Layout() {
   );
 }
 
+// Halaman Home
 function HomePage() {
   return (
     <>
-      <Banner />
-      <Profile />
-      <Point />
-      <Packet />
+      <div id="beranda"><Banner /></div>
+      <div id="tentang"><Profile /></div>
+      <div id="paket"><Packet /></div>
+      <div id="fasilitas"><Point /></div>
       <Review />
       <FAQ />
-      <Gallery />
+      <div id="galeri"><Gallery /></div>
     </>
   );
+}
+
+// Halaman Tentang
+function TentangPage() {
+  return <Profile />;
+}
+
+// Halaman Fasilitas
+function FasilitasPage() {
+  return <Point />;
+}
+
+// Halaman Paket
+function PaketPage() {
+  return <Packet />;
+}
+
+// Halaman Galeri
+function GaleriPage() {
+  return <Gallery />;
 }
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
+
+        {/* Home */}
         <Route index element={<HomePage />} />
+
+        {/* Halaman-halaman Navbar */}
+        <Route path="tentang" element={<TentangPage />} />
+        <Route path="paket" element={<PaketPage />} />
+        <Route path="fasilitas" element={<FasilitasPage />} />
+        <Route path="galeri" element={<GaleriPage />} />
+
+        {/* Detail Paket */}
         <Route path="packet-details" element={<PacketDetails />} />
       </Route>
     </Routes>

@@ -64,7 +64,7 @@ function App() {
               miliki.
             </p>
             <p className="pt-3 text-[#1DA599]">
-              Hubungi Whatsapp Kami +62 857 0186 880 atau info@alfajr.co.id
+              Hubungi Whatsapp Kami +62 857 0186 880 atau info @alfajr.co.id
             </p>
           </div>
         </div>
