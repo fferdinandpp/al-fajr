@@ -4,7 +4,7 @@ function App() {
   return (
     <>
       <div
-        className="w-full h-screen flex justify-center items-center bg-cover bg-center"
+        className="h-[940px] flex justify-center items-center bg-cover bg-center"
         style={{ backgroundImage: `url(${Banner})` }}
       >
         <div className="flex flex-col items-center w-[450px] text-[#3F3F3F] text-center gap-5">

@@ -3,6 +3,7 @@ import Airport from "../assets/icons/Airport.png";
 import Sleep from "../assets/icons/Sleep.png";
 import Buildings from "../assets/icons/Buildings.png";
 import Mascapai from "../assets/icons/Mascapai.png";
+import {Link} from "react-router-dom";
 
 function App() {
   return (
@@ -73,12 +74,12 @@ function App() {
               >
                 Daftar Sekarang
               </a>
-              <a
-                href=""
+              <Link
+                to="/packet-details"
                 className="border-2 border-[#FFC265] text-[#FFC265] text-sm w-2/5 py-2 rounded-md"
               >
                 Lihat Selengkapnya
-              </a>
+              </Link>
             </div>
           </div>
           <div className=" flex flex-col bg-[#4A4D4E] rounded-lg p-7 w-1/3 gap-2">
@@ -136,12 +137,12 @@ function App() {
               >
                 Daftar Sekarang
               </a>
-              <a
-                href=""
+              <Link
+                to="/packet-details"
                 className="border-2 border-[#FFC265] text-[#FFC265] text-sm w-2/5 py-2 rounded-md"
               >
                 Lihat Selengkapnya
-              </a>
+              </Link>
             </div>
           </div>
           <div className=" flex flex-col bg-[#4A4D4E] rounded-lg p-7 w-1/3 gap-2">
@@ -199,12 +200,12 @@ function App() {
               >
                 Daftar Sekarang
               </a>
-              <a
-                href=""
+              <Link
+                to="/packet-details"
                 className="border-2 border-[#FFC265] text-[#FFC265] text-sm w-2/5 py-2 rounded-md"
               >
                 Lihat Selengkapnya
-              </a>
+              </Link>
             </div>
           </div>
           <div className=" flex flex-col bg-[#4A4D4E] rounded-lg p-7 w-1/3 gap-2">
@@ -262,12 +263,12 @@ function App() {
               >
                 Daftar Sekarang
               </a>
-              <a
-                href=""
+              <Link
+                to="/packet-details"
                 className="border-2 border-[#FFC265] text-[#FFC265] text-sm w-2/5 py-2 rounded-md"
               >
                 Lihat Selengkapnya
-              </a>
+              </Link>
             </div>
           </div>
         </div>

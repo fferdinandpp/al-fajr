@@ -4,7 +4,7 @@ function App() {
   return (
     <>
       <div
-        className="w-full h-screen bg-cover bg-center px-20 py-10"
+        className="w-full bg-cover bg-center px-20 py-10"
         style={{ backgroundImage: `url(${Review})` }}
       >
         <div className="text-white">
