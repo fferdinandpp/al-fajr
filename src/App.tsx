@@ -33,8 +33,8 @@ function HomePage() {
     <>
       <div id="beranda"><Banner /></div>
       <div id="tentang"><Profile /></div>
-      <div id="paket"><Packet /></div>
       <div id="fasilitas"><Point /></div>
+      <div id="paket"><Packet /></div>
       <Review />
       <FAQ />
       <div id="galeri"><Gallery /></div>
