@@ -1,75 +1,70 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
-function App() {
+interface FAQItem {
+  id: number;
+  pertanyaan: string;
+  jawaban: string;
+}
+
+function FAQ() {
+  const [faq, setFaq] = useState<FAQItem[]>([]);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  useEffect(() => {
+    axios
+      .get("https://adminside.alfajrumroh.co.id/api/faq")
+      .then((res) => setFaq(res.data.data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  const toggle = (i: number) => {
+    setOpenIndex(openIndex === i ? null : i);
+  };
+
   return (
-    <>
-      <div className="px-20 py-12">
-        <div className="text-center text-[#4A4A4A] pb-7">
-          <h1 className="text-3xl font-extrabold pb-2">
-            Frequently Asked Questions
-          </h1>
-          <p>
-            Temukan pertanyaan yang paling sering ditanyakan tentang Umrah &
-            Haji Plus
-          </p>
-        </div>
-        <div className="flex flex-col gap-5 justify-center items-center pb-10">
-          <div className="border border-black w-2/3 p-5 rounded-lg">
-          <div className="flex items-center justify-between">
-            <h3 className="text-center">
-              Apa saja yang termasuk dalam harga paket?
-            </h3>
-            <FontAwesomeIcon icon={faChevronUp} />
-          </div>
-            <p className="text-xs text-justify text-[#454545] pt-5">
-              Paket ini mencakup tiket pesawat return kelas ekonomi dengan rute
-              YIA – KUL – MED/JED – KUL – YIA termasuk bagasi 25 kg dan kabin 7
-              kg. Jamaah mendapatkan Visa Umroh, asuransi perjalanan, serta
-              transportasi bus private ber-AC lengkap dengan sopir. Akomodasi
-              hotel disediakan di Makkah dan Madinah, berikut makan pagi, siang,
-              dan malam dengan menu prasmanan khas Indonesia. Seluruh perjalanan
-              mencakup program tur dan ziarah sesuai jadwal, didampingi tour
-              guide berpengalaman di Tanah Suci dan tour leader dari Indonesia
-              apabila jumlah peserta memenuhi kuota. Sebelum berangkat, jamaah
-              mengikuti manasik sebagai pembekalan. Setibanya di Arab Saudi,
-              tersedia Welcoming Meals Albaik, serta perlengkapan dasar dan
-              layanan handling. Pada saat kepulangan, setiap jamaah juga
-              mendapatkan air Zam-zam sebanyak 5 liter.
-            </p>
-          </div>
-          <div className="flex items-center justify-between border border-black w-2/3 p-5 rounded-lg">
-            <h3>Bagaimana Kebijakan Konfirmasi Pindah Paket / Reschedule?</h3>
-            <FontAwesomeIcon icon={faChevronDown} />
-          </div>
-          <div className="flex items-center justify-between border border-black w-2/3 p-5 rounded-lg">
-            <h3>Apa saja persyaratan untuk pendaftaran?</h3>
-            <FontAwesomeIcon icon={faChevronDown} />
-          </div>
-          <div className="flex items-center justify-between border border-black w-2/3 p-5 rounded-lg">
-            <h3>Berapa banyak orang dalam satu kelompok?</h3>
-            <FontAwesomeIcon icon={faChevronDown} />
-          </div>
-          <div className="flex items-center justify-between border border-black w-2/3 p-5 rounded-lg">
-            <h3>Apa kebijakan pembatalan Anda?</h3>
-            <FontAwesomeIcon icon={faChevronDown} />
-          </div>
-        </div>
-        <div className="flex justify-center">
-          <div className="bg-[#F8F7F5] w-2/3 p-7 text-center">
-            <p>Masih punya pertanyaan yang lain?</p>
-            <p className="pt-3">
-              Tim kami siap membantu Anda dengan pertanyaan apa pun yang Anda
-              miliki.
-            </p>
-            <p className="pt-3 text-[#1DA599]">
-              Hubungi Whatsapp Kami +62 857 0186 880 atau info @alfajr.co.id
-            </p>
-          </div>
-        </div>
+    <div className="px-20 py-12 md:px-10 max-sm:px-3 max-sm:py-6">
+      <div className="text-center text-[#4A4A4A] pb-7">
+        <h1 className="text-3xl font-extrabold pb-2 max-sm:text-2xl">
+          Frequently Asked Questions
+        </h1>
+        <p className="max-sm:text-base leading-relaxed">
+          Temukan pertanyaan yang paling sering ditanyakan tentang Umrah & Haji Plus
+        </p>
       </div>
-    </>
+
+      <div className="flex flex-col gap-5 justify-center items-center pb-10">
+        {faq.map((item, i) => (
+          <div
+            key={item.id}
+            className="
+              border border-black rounded-xl w-2/3 p-5
+              md:w-4/5 
+              max-sm:w-full max-sm:p-5 max-sm:text-base
+            "
+          >
+            <div
+              className="flex items-center justify-between cursor-pointer"
+              onClick={() => toggle(i)}
+            >
+              <h3 className="max-sm:text-base">{item.pertanyaan}</h3>
+              <FontAwesomeIcon
+                icon={openIndex === i ? faChevronUp : faChevronDown}
+              />
+            </div>
+
+            {openIndex === i && (
+              <p className="text-xs max-sm:text-sm text-justify text-[#454545] pt-5 whitespace-pre-line leading-relaxed">
+                {item.jawaban}
+              </p>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
-export default App;
+
+export default FAQ;
