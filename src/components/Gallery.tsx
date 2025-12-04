@@ -23,11 +23,17 @@ function App() {
   // PHOTO SLIDER FOR MOBILE
   const photos = [Gallery, Gallery, Gallery, Gallery, Gallery];
   const [photoIndex, setPhotoIndex] = useState(0);
-  const photoRef = useRef(null);
+
+  // 🔥 FIX: Tambah tipe untuk menghindari null error
+  const photoRef = useRef<HTMLDivElement | null>(null);
 
   const handlePhotoScroll = () => {
-    const scrollLeft = photoRef.current.scrollLeft;
-    const width = photoRef.current.clientWidth;
+    // 🔥 FIX: Cek null dulu agar Vercel tidak error
+    if (!photoRef.current) return;
+
+    const scrollLeft = photoRef.current.scrollLeft ?? 0;
+    const width = photoRef.current.clientWidth || 1;
+
     const newIndex = Math.round(scrollLeft / width);
     setPhotoIndex(newIndex);
   };
@@ -112,7 +118,7 @@ function App() {
               ))}
             </div>
 
-            {/* DOTS — ONLY ONE INDICATOR */}
+            {/* DOTS */}
             <div className="flex justify-center mt-2 space-x-2">
               {photos.map((_, i) => (
                 <div
@@ -126,7 +132,7 @@ function App() {
             </div>
           </div>
 
-          {/* TABLET & DESKTOP GRID */}
+          {/* DESKTOP GRID */}
           <div
             className="
               hidden sm:grid 
