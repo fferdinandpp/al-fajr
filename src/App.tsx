@@ -1,4 +1,5 @@
 import { Routes, Route, Outlet } from "react-router-dom";
+import { useState } from "react";
 
 import Navbar from "./components/Navbar";
 import Banner from "./components/Banner";
@@ -10,13 +11,18 @@ import FAQ from "./components/FAQ";
 import Gallery from "./components/Gallery";
 import Footer from "./components/Footer";
 import PacketDetails from "./components/PacketDetails";
+import FloatingContact from "./components/FloatingContact";
 
 function Layout() {
+
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <>
-      <Navbar />
+      <Navbar onMenuChange={setSidebarOpen} />
       <Outlet />
       <Footer />
+      <FloatingContact hidden={sidebarOpen} />
     </>
   );
 }

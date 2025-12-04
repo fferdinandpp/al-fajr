@@ -2,7 +2,10 @@ import { useState, useRef } from "react";
 import Thumbnail from "../assets/img/Thumbnail.png";
 import Gallery from "../assets/img/Gallery.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const videoThumbnails = [Thumbnail, Thumbnail, Thumbnail];
@@ -20,20 +23,16 @@ function App() {
     );
   };
 
-  // PHOTO SLIDER FOR MOBILE
+  // PHOTO SLIDER (MOBILE)
   const photos = [Gallery, Gallery, Gallery, Gallery, Gallery];
   const [photoIndex, setPhotoIndex] = useState(0);
-
-  // 🔥 FIX: Tambah tipe untuk menghindari null error
   const photoRef = useRef<HTMLDivElement | null>(null);
 
   const handlePhotoScroll = () => {
-    // 🔥 FIX: Cek null dulu agar Vercel tidak error
     if (!photoRef.current) return;
 
     const scrollLeft = photoRef.current.scrollLeft ?? 0;
     const width = photoRef.current.clientWidth || 1;
-
     const newIndex = Math.round(scrollLeft / width);
     setPhotoIndex(newIndex);
   };
@@ -41,7 +40,6 @@ function App() {
   return (
     <>
       <div className="bg-[#FFF2CC] px-20 py-10 md:px-10 sm:px-5 sm:py-8 overflow-hidden">
-
         {/* TITLE */}
         <div className="text-center text-[#4A4A4A] pb-7">
           <h1 className="text-3xl font-extrabold pb-2 sm:text-2xl">
@@ -58,14 +56,12 @@ function App() {
           <h3 className="font-semibold text-2xl pb-5 sm:text-xl">Video</h3>
 
           <div className="flex items-center justify-center gap-5 md:gap-10">
-
             <FontAwesomeIcon
               icon={faChevronLeft}
               className="text-3xl sm:text-2xl cursor-pointer"
               onClick={prevVideo}
             />
 
-            {/* RESPONSIVE VIDEO SLIDER */}
             <div className="relative w-full max-w-[900px] md:max-w-[750px] overflow-hidden rounded-lg">
               <div
                 className="flex transition-transform duration-500 ease-in-out"
@@ -75,8 +71,7 @@ function App() {
                   <img
                     key={idx}
                     src={thumb}
-                    className="w-full flex-shrink-0 object-cover 
-                               h-52 sm:h-64 md:h-auto"
+                    className="w-full flex-shrink-0 object-cover h-52 sm:h-64 md:h-auto"
                     alt="Video Thumbnail"
                   />
                 ))}
@@ -97,12 +92,10 @@ function App() {
 
           {/* MOBILE SLIDER */}
           <div className="block sm:hidden w-full overflow-hidden">
-
-            {/* SLIDER */}
             <div
               ref={photoRef}
               onScroll={handlePhotoScroll}
-              className="flex overflow-x-auto snap-x snap-mandatory space-x-4 pb-4 scroll-smooth"
+              className="flex overflow-x-auto snap-x snap-mandatory space-x-4 pb-4 scroll-smooth no-scrollbar"
             >
               {photos.map((img, idx) => (
                 <div
@@ -125,34 +118,65 @@ function App() {
                   key={i}
                   className={`
                     w-3 h-3 rounded-full transition-all duration-300
-                    ${photoIndex === i ? "bg-[#4A4A4A] scale-110" : "bg-gray-400 opacity-70"}
+                    ${
+                      photoIndex === i
+                        ? "bg-[#4A4A4A] scale-110"
+                        : "bg-gray-400 opacity-70"
+                    }
                   `}
                 ></div>
               ))}
             </div>
           </div>
 
-          {/* DESKTOP GRID */}
+          {/* DESKTOP GRID (ASIMETRIS SEPERTI GAMBAR) */}
+          {/* DESKTOP GRID (Premium Layout) */}
           <div
             className="
-              hidden sm:grid 
-              grid-cols-5 grid-rows-2 gap-10 
-              md:gap-6
-            "
+    hidden sm:grid 
+    grid-cols-3 gap-6 
+    w-full max-w-6xl
+  "
           >
-            <img
-              src={Gallery}
-              className="row-span-2 w-full h-full object-cover"
-              alt="Gallery"
-            />
-            {photos.slice(1).map((img, i) => (
+            {/* KOLOM KIRI – FOTO BESAR */}
+            <div className="col-span-1 flex">
               <img
-                key={i}
-                src={img}
-                className="w-full h-full object-cover"
-                alt="Gallery"
+                src={photos[0]}
+                className="w-full h-full object-cover rounded-xl"
+                alt="Gallery Large"
               />
-            ))}
+            </div>
+
+            {/* KOLOM KANAN – 4 FOTO KECIL */}
+            <div className="col-span-2 grid grid-cols-2 gap-6">
+              <img
+                src={photos[1]}
+                className="w-full h-48 object-cover rounded-xl"
+                alt="Gallery Small"
+              />
+              <img
+                src={photos[2]}
+                className="w-full h-48 object-cover rounded-xl"
+                alt="Gallery Small"
+              />
+              <img
+                src={photos[3]}
+                className="w-full h-48 object-cover rounded-xl"
+                alt="Gallery Small"
+              />
+              <img
+                src={photos[4]}
+                className="w-full h-48 object-cover rounded-xl"
+                alt="Gallery Small"
+              />
+            </div>
+          </div>
+
+          {/* BUTTON SHOW ALL – DESKTOP */}
+          <div className="hidden sm:flex w-full max-w-6xl justify-end mt-3">
+            <button className="bg-white px-4 py-2 rounded-lg shadow text-sm font-semibold">
+              Show all photos
+            </button>
           </div>
         </div>
       </div>

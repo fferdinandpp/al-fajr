@@ -24,13 +24,13 @@ function App() {
         {/* CARD WRAPPER */}
         <div className="flex flex-wrap justify-center gap-8 md:gap-12 lg:gap-16 pb-10">
 
-          {/* CARD TEMPLATE */}
           {[1, 2, 3, 4].map((_, i) => (
             <div
               key={i}
               className="
                 flex flex-col bg-[#4A4D4E] rounded-lg p-5 md:p-6 lg:p-7 
-                w-full sm:w-1/2 md:w-1/3 lg:w-1/3
+                w-full sm:w-1/2 md:w-1/2 lg:w-1/2
+                max-w-[400px]
                 gap-2
               "
             >
@@ -51,7 +51,6 @@ function App() {
                 Rp 30.000.000/ orang
               </h3>
 
-              {/* ITEM LIST */}
               <div className="flex flex-col gap-3 pb-4 md:pb-5">
 
                 <div className="flex items-center gap-3">
@@ -92,7 +91,6 @@ function App() {
 
               </div>
 
-              {/* BUTTONS */}
               <div className="flex flex-col text-center items-end gap-3">
                 <a
                   href=""
@@ -112,7 +110,6 @@ function App() {
           ))}
         </div>
 
-        {/* FOOTER TEXT */}
         <div className="text-lg md:text-xl lg:text-2xl text-center font-semibold leading-relaxed">
           Yuk, segera daftarkan Anda bersama Keluarga, <br className="hidden md:block" />
           menjalankan ibadah yang paling mulia dan percayakan <br className="hidden md:block" />

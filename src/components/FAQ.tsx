@@ -11,7 +11,7 @@ interface FAQItem {
 
 function FAQ() {
   const [faq, setFaq] = useState<FAQItem[]>([]);
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   useEffect(() => {
     axios
