@@ -1,4 +1,4 @@
-import Logo from "../assets/img/Logo.png";
+import Logo from "../assets/img/LogoWhite.png";
 import Instagram from "../assets/icons/Instagram.png";
 import Youtube from "../assets/icons/YouTube.png";
 import Tiktok from "../assets/icons/Tiktok.png";
@@ -35,7 +35,7 @@ function App() {
           <div className="max-sm:text-center max-sm:flex max-sm:flex-col max-sm:items-center">
             <img
               src={Logo}
-              className="rounded-lg bg-white py-3 px-5 max-sm:w-28"
+              className="bg-white rounded-lg p-2 w-48 max-sm:w-28 object-contain"
               alt="Logo"
             />
 

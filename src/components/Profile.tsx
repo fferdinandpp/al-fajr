@@ -1,10 +1,11 @@
-import Logo_2 from "../assets/img/Logo_2.png";
+import Logo from "../assets/img/LogoNoBG.png";
 import Legal from "../assets/icons/Legal.png";
 
 function App() {
   return (
     <>
-      <div className="
+      <div
+        className="
         w-full h-fit 
         p-6 md:p-12 lg:p-20 
         flex flex-col lg:flex-row 
@@ -12,18 +13,14 @@ function App() {
         justify-center 
         gap-10 md:gap-16 lg:gap-24
         bg-gradient-to-br from-[#CDC8A3] via-[#9A967B] to-[#B3AF8F]
-      ">
-        
+      "
+      >
         {/* LOGO */}
         <div className="flex items-center justify-center lg:justify-start">
-          <img 
-            src={Logo_2} 
-            className="w-40 md:w-56 lg:w-72" 
-            alt="Logo" 
-          />
+          <img src={Logo} className="w-40 md:w-56 lg:w-72" alt="Logo" />
         </div>
 
-        {/* VERTICAL LINE (hidden on mobile) */}
+        {/* VERTICAL LINE */}
         <div className="hidden lg:block w-[2px] bg-black"></div>
 
         {/* CONTENT */}
@@ -32,7 +29,7 @@ function App() {
             Profil Perusahaan
           </h1>
 
-          <p className="text-justify text-sm md:text-base pb-7">
+          <p className="text-justify text-sm md:text-base pb-7 leading-relaxed">
             Alfajr Travelindo Indonesia adalah biro perjalanan Umroh & Haji yang
             berdiri sejak 2017 dan telah resmi berizin Kementerian Agama,
             menjadikannya salah satu penyelenggara yang tepercaya. Berkantor
@@ -44,8 +41,7 @@ function App() {
             yang tinggi berkat pelayanan profesional dan pendampingan yang
             menyeluruh. Dengan visi menjadi penyelenggara perjalanan yang amanah
             dan berkualitas, Alfajr berkomitmen memberikan layanan sesuai
-            Al-Qur’an dan sunnah, mulai dari pendaftaran hingga kepulangan
-            jamaah.
+            Al-Qur’an dan sunnah.
           </p>
 
           <h2 className="text-center text-xl md:text-2xl font-extrabold pb-5">
@@ -54,43 +50,52 @@ function App() {
 
           {/* LEGAL CARDS */}
           <div className="flex flex-col md:flex-row items-center gap-5">
-            
-            {/* Card 1 */}
-            <div className="
-              flex items-center justify-center gap-3 
-              bg-[#174623] border-2 border-[#7C7C7C] rounded-md 
-              w-full md:w-1/2 py-3
-            ">
+            {/* Card 1 — IZIN UMROH */}
+            <a
+              href="https://drive.google.com/file/d/1ha9QaBCvJUjXX9eDsURBT7HjffyQClhS/view"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                flex items-center justify-center gap-3 
+                bg-[#174623] border-2 border-[#7C7C7C] rounded-md 
+                w-full md:w-1/2 py-3 cursor-pointer hover:scale-[1.03] 
+                transition-transform duration-300
+              "
+            >
               <img src={Legal} className="w-8 md:w-10" alt="Legal" />
               <div>
                 <p className="text-xs md:text-sm text-white">
                   IZIN UMROH (PPIU) KEMENAG RI
                 </p>
                 <p className="text-[#CACF2C] text-xs md:text-sm">
-                  SK U. 165 TAHUN 2021
+                  Klik untuk melihat dokumen
                 </p>
               </div>
-            </div>
+            </a>
 
-            {/* Card 2 */}
-            <div className="
-              flex items-center justify-center gap-3 
-              bg-[#174623] border-2 border-[#7C7C7C] rounded-md 
-              w-full md:w-1/2 py-3
-            ">
+            {/* Card 2 — AKREDITASI */}
+            <a
+              href="https://drive.google.com/file/d/1eQTMgzpHcx3O2vh62UGsG_43z1JPeu7m/view"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                flex items-center justify-center gap-3 
+                bg-[#174623] border-2 border-[#7C7C7C] rounded-md 
+                w-full md:w-1/2 py-3 cursor-pointer hover:scale-[1.03]
+                transition-transform duration-300
+              "
+            >
               <img src={Legal} className="w-8 md:w-10" alt="Legal" />
               <div>
                 <p className="text-xs md:text-sm text-white">
-                  IZIN UMROH (PPIU) KEMENAG RI
+                  AKREDITASI RESMI KEMENAG RI
                 </p>
                 <p className="text-[#CACF2C] text-xs md:text-sm">
-                  SK U. 165 TAHUN 2021
+                  Klik untuk melihat dokumen
                 </p>
               </div>
-            </div>
-
+            </a>
           </div>
-
         </div>
       </div>
     </>

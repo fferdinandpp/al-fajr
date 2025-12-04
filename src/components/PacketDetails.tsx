@@ -1,126 +1,185 @@
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+
 import Background from "../assets/img/BGDetailPaket.png";
-import Itenary from "../assets/icons/Itenary.png";
-import Flyer from "../assets/icons/Flyer.png";
-import Poster from "../assets/img/PosterPaket.jpg";
-import Detail from "../assets/img/DetailPaket.png";
-import Pesawat from "../assets/img/InformasiPesawat.png";
-import Hotel1 from "../assets/img/Hotel1.png";
-import Hotel2 from "../assets/img/Hotel2.png";
+import ItenaryIcon from "../assets/icons/Itenary.png";
+import FlyerIcon from "../assets/icons/Flyer.png";
 
-function App() {
-  return (
-    <>
-      <div
-  className="
-    h-full bg-cover bg-center 
-    px-5 py-8
-    md:px-10 md:py-10
-    lg:px-20
-    pt-28 md:pt-32 lg:pt-36
-  "
-  style={{ backgroundImage: `url(${Background})` }}
->
-  <div className="text-center">
-    <h1 className="text-2xl md:text-3xl lg:text-4xl text-white font-extrabold pb-6 md:pb-10">
-      PAKET UMROH FULL TURKEY
-    </h1>
-
-    <img
-      src={Poster}
-      className="mx-auto pb-6 md:pb-10 w-full max-w-sm md:max-w-md lg:max-w-lg"
-      alt="Poster"
-    />
-  </div>
-
-  {/* BUTTON ITINERARY - DAFTAR - FLYER */}
-  <div
-    className="
-      flex flex-col md:flex-row
-      justify-center items-center
-      text-white gap-5 md:gap-20 pb-10
-    "
-  >
-    <div className="flex items-center justify-between bg-[#393835] w-full md:w-56 h-14 px-6 rounded-full shadow-lg">
-      <p className="font-bold text-lg">Itinerary</p>
-      <img src={Itenary} alt="Itenary" />
-    </div>
-
-    <a
-      href=""
-      className="
-        bg-[#393835] w-full md:w-36 text-center 
-        p-3 rounded-md border border-[#FFC265]
-      "
-    >
-      Daftar Sekarang
-    </a>
-
-    <div className="flex items-center justify-between bg-[#393835] w-full md:w-56 h-14 px-6 rounded-full shadow-lg">
-      <p className="font-bold text-lg">Flyer</p>
-      <img src={Flyer} alt="Flyer" />
-    </div>
-  </div>
-
-  {/* DETAIL INFO */}
-  <div>
-    <img
-      src={Detail}
-      className="rounded-lg mx-auto pb-10 w-full max-w-2xl"
-      alt="Detail Paket"
-    />
-    <div className="w-full h-[1px] bg-white mb-10"></div>
-  </div>
-
-  {/* INFORMASI PESAWAT */}
-  <div className="text-white">
-    <h1 className="text-xl md:text-2xl text-center pb-6 md:pb-10">
-      INFORMASI PESAWAT
-    </h1>
-    <img
-      src={Pesawat}
-      className="mx-auto pb-10 w-full max-w-2xl"
-      alt="Informasi Pesawat"
-    />
-    <div className="w-full h-[1px] bg-white mb-10"></div>
-  </div>
-
-  {/* INFORMASI HOTEL */}
-  <div className="text-white">
-    <h1 className="text-xl md:text-2xl text-center pb-8">
-      INFORMASI HOTEL
-    </h1>
-
-    <div
-      className="
-        flex flex-col md:flex-row 
-        md:justify-evenly items-center gap-10 md:gap-0
-      "
-    >
-      {/* HOTEL 1 */}
-      <div className="text-center">
-        <div className="bg-black p-5 rounded-2xl mb-5 w-full max-w-sm mx-auto">
-          <img src={Hotel1} className="mx-auto" alt="Hotel 1" />
-        </div>
-        <h2 className="text-lg md:text-xl font-bold">HOTEL TALAD AJYAD</h2>
-        <p className="text-lg md:text-xl font-bold">(Makkah)</p>
-      </div>
-
-      {/* HOTEL 2 */}
-      <div className="text-center">
-        <div className="bg-black p-5 rounded-2xl mb-5 w-full max-w-sm mx-auto">
-          <img src={Hotel2} className="mx-auto" alt="Hotel 2" />
-        </div>
-        <h2 className="text-lg md:text-xl font-bold">
-          HOTEL KAYAN INTERNATIONAL
-        </h2>
-        <p className="text-lg md:text-xl font-bold">(Madinah)</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-    </>
-  );
+interface AkomodasiItem {
+  nama: string;
+  kota: string;
+  gambar?: string | null;
 }
 
-export default App;
+interface PaketDetail {
+  id: number;
+  nama_paket: string;
+  judul: string;
+  harga_tampil: number;
+  kategori: string;
+  maskapai: string;
+  durasi_paket: string;
+  bandara_keberangkatan: string;
+  kota_keberangkatan: string;
+  gambar_url: string;
+  itinerary_url: string | null;
+  akomodasi: AkomodasiItem[];
+}
+
+export default function PacketDetails() {
+  const [params] = useSearchParams();
+  const id = params.get("id");
+
+  const [paket, setPaket] = useState<PaketDetail | null>(null);
+
+  useEffect(() => {
+    if (!id) return;
+
+    fetch(`https://adminside.alfajrumroh.co.id/api/paket/${id}`)
+      .then((r) => r.json())
+      .then((json) => setPaket(json?.data ?? null))
+      .catch((err) => console.log("Detail Paket Error:", err));
+  }, [id]);
+
+  if (!paket)
+    return (
+      <div className="text-center text-xl py-40">Memuat detail paket...</div>
+    );
+
+  const openItinerary = () => {
+    if (!paket.itinerary_url) {
+      alert("Itinerary belum tersedia");
+      return;
+    }
+
+    window.open(paket.itinerary_url, "_blank");
+  };
+
+  const daftarSekarang = () => {
+    const message = encodeURIComponent(
+      `Halo, saya ingin mendaftar paket: ${paket.nama_paket}`
+    );
+    window.open(`https://wa.me/6281385233145?text=${message}`, "_blank");
+  };
+
+  return (
+    <div
+      className="
+        min-h-screen bg-cover bg-center 
+        px-5 py-8 md:px-10 lg:px-20
+        pt-28 md:pt-32 lg:pt-36 text-white
+      "
+      style={{ backgroundImage: `url(${Background})` }}
+    >
+      {/* Title */}
+      <div className="text-center">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold pb-6">
+          {paket.nama_paket}
+        </h1>
+
+        <div className="w-full max-w-md md:max-w-lg lg:max-w-2xl mx-auto">
+          <img
+            src={paket.gambar_url}
+            alt="Poster Paket"
+            className="
+      w-full h-[260px] md:h-[320px] lg:h-[380px]
+      object-cover object-center
+      rounded-lg shadow-lg
+    "
+          />
+        </div>
+      </div>
+
+      {/* BUTTONS */}
+      <div className="flex flex-col md:flex-row justify-center items-center gap-6 pb-10">
+        {/* Itinerary */}
+        <button
+          onClick={openItinerary}
+          className="
+            flex items-center justify-between 
+            bg-[#393835] w-full md:w-56 h-14 px-6 
+            rounded-full shadow-lg hover:scale-105 
+            transition-all
+          "
+        >
+          <p className="font-bold text-lg">Itinerary</p>
+          <img src={ItenaryIcon} alt="Itenary" />
+        </button>
+
+        {/* Daftar */}
+        <button
+          onClick={daftarSekarang}
+          className="
+            bg-[#393835] w-full md:w-36 text-center 
+            p-3 rounded-md border border-[#FFC265]
+            hover:bg-[#4c4b49] transition
+          "
+        >
+          Daftar Sekarang
+        </button>
+
+        {/* Flyer (same as poster) */}
+        <a
+          href={paket.gambar_url}
+          target="_blank"
+          className="
+            flex items-center justify-between 
+            bg-[#393835] w-full md:w-56 h-14 px-6 
+            rounded-full shadow-lg hover:scale-105 
+            transition-all
+          "
+        >
+          <p className="font-bold text-lg">Flyer</p>
+          <img src={FlyerIcon} alt="Flyer" />
+        </a>
+      </div>
+
+      {/* INFORMASI DETAIL */}
+      <div className="text-center">
+        <div className="bg-white h-[1px] w-full my-10 opacity-50"></div>
+
+        <h1 className="text-xl md:text-2xl pb-6">INFORMASI PENERBANGAN</h1>
+
+        <div className="text-lg leading-relaxed pb-8">
+          <p>
+            Maskapai: <b>{paket.maskapai}</b>
+          </p>
+          <p>
+            Durasi: <b>{paket.durasi_paket} Hari</b>
+          </p>
+          <p>
+            Kota Keberangkatan: <b>{paket.kota_keberangkatan}</b>
+          </p>
+          <p>
+            Bandara: <b>{paket.bandara_keberangkatan}</b>
+          </p>
+        </div>
+
+        <div className="bg-white h-[1px] w-full my-10 opacity-50"></div>
+
+        <h1 className="text-xl md:text-2xl pb-8">INFORMASI HOTEL</h1>
+
+        <div className="flex flex-col md:flex-row justify-evenly items-center gap-10">
+          {paket.akomodasi.length === 0 ? (
+            <p>Informasi hotel belum tersedia</p>
+          ) : (
+            paket.akomodasi.map((hotel: AkomodasiItem, idx: number) => (
+              <div key={idx} className="text-center">
+                <div className="bg-black p-5 rounded-2xl mb-5 w-full max-w-sm mx-auto">
+                  <img
+                    src={hotel.gambar ?? ""}
+                    className="mx-auto"
+                    alt={hotel.nama}
+                  />
+                </div>
+
+                <h2 className="text-lg md:text-xl font-bold">{hotel.nama}</h2>
+                <p className="text-lg md:text-xl font-bold">({hotel.kota})</p>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

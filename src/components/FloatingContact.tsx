@@ -38,7 +38,7 @@ function FloatingContact({ hidden }: { hidden: boolean }) {
       className={`
         fixed right-5 bottom-5 z-[99999]
         flex items-center gap-3
-        bg-white/90 backdrop-blur-xl
+        bg-[#E8E0B2] backdrop-blur-xl
         shadow-xl border border-white/50
         px-4 py-2 rounded-full cursor-pointer select-none
         hover:scale-105 hover:shadow-2xl
@@ -50,10 +50,10 @@ function FloatingContact({ hidden }: { hidden: boolean }) {
       <img src={WAIcon} className="w-7 h-7" />
 
       <div className="flex flex-col leading-tight">
-        <p className="text-[11px] font-semibold text-gray-600">
+        <p className="text-[11px] font-semibold text-[#525252]">
           Marketing Online
         </p>
-        <p className="text-sm font-bold text-[#CFAD48]">
+        <p className="text-sm font-bold text-[#525252]">
           {marketing?.name ?? ""}
         </p>
       </div>

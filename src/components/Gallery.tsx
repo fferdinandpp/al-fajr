@@ -174,7 +174,7 @@ function App() {
 
           {/* BUTTON SHOW ALL – DESKTOP */}
           <div className="hidden sm:flex w-full max-w-6xl justify-end mt-3">
-            <button className="bg-white px-4 py-2 rounded-lg shadow text-sm font-semibold">
+            <button className="bg-[#1DA599] text-white px-4 py-2 rounded-lg shadow text-sm font-semibold">
               Show all photos
             </button>
           </div>

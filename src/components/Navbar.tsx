@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import Logo from "../assets/img/Logo.png";
-import Call from "../assets/icons/Call.png";
+import Logo from "../assets/img/LogoWhite.png";
 import { useNavigate, useLocation } from "react-router-dom";
 
 interface NavbarProps {
@@ -97,45 +96,83 @@ function Navbar({ onMenuChange }: NavbarProps) {
       {/* NAVBAR */}
       <div
         className={`
-          fixed top-0 left-0 w-full z-50
-          transition-all duration-300 ease-out
-          ${isHidden ? "-translate-y-full" : "translate-y-0"}
-          ${isScrolled ? "backdrop-blur-xl bg-white/70 shadow-lg h-16" : "bg-white h-20 shadow-none"}
-        `}
+    fixed top-0 left-0 w-full z-50
+    transition-all duration-300 ease-out
+    ${isHidden ? "-translate-y-full" : "translate-y-0"}
+    ${
+      isScrolled
+        ? "backdrop-blur-xl bg-white/70 shadow-lg h-16"
+        : "bg-white h-20 shadow-none"
+    }
+  `}
       >
-        <div className="px-6 lg:px-20 flex items-center justify-between h-full">
-          
+        {/* FLEX untuk mobile & tablet, GRID untuk desktop */}
+        <div
+          className="px-6 lg:px-20 flex items-center justify-between h-full lg:grid lg:grid-cols-3">
           {/* LOGO */}
           <img src={Logo} className="h-12 md:h-14" alt="Logo" />
 
-          {/* DESKTOP MENU */}
-          <div className="hidden lg:flex gap-10 items-center">
-            <div className="flex gap-10">
-              <button onClick={() => scrollToSection("beranda")} className={navStyle("beranda")}>Beranda</button>
-              <button onClick={() => scrollToSection("tentang")} className={navStyle("tentang")}>Tentang Kami</button>
-              <button onClick={() => scrollToSection("paket")} className={navStyle("paket")}>Paket</button>
-              <button onClick={() => scrollToSection("fasilitas")} className={navStyle("fasilitas")}>Fasilitas</button>
-              <button onClick={() => scrollToSection("galeri")} className={navStyle("galeri")}>Galeri</button>
-            </div>
-
-            <div className="flex items-center gap-6 text-[#525252]">
-              <div className="flex gap-2 items-center">
-                <img src={Call} className="w-7 h-7" alt="Call" />
-                <p>+62 587123456</p>
-              </div>
-              <p>alfajr@travelindo.co.id</p>
+          {/* MENU TENGAH — DESKTOP ONLY */}
+          <div className="hidden lg:flex justify-center">
+            <div className="flex gap-7">
+              <button
+                onClick={() => scrollToSection("beranda")}
+                className={navStyle("beranda")}
+              >
+                Beranda
+              </button>
+              <button
+                onClick={() => scrollToSection("tentang")}
+                className={navStyle("tentang")}
+              >
+                Tentang Kami
+              </button>
+              <button
+                onClick={() => scrollToSection("paket")}
+                className={navStyle("paket")}
+              >
+                Paket
+              </button>
+              <button
+                onClick={() => scrollToSection("fasilitas")}
+                className={navStyle("fasilitas")}
+              >
+                Fasilitas
+              </button>
+              <button
+                onClick={() => scrollToSection("galeri")}
+                className={navStyle("galeri")}
+              >
+                Galeri
+              </button>
             </div>
           </div>
 
-          {/* BURGER */}
+          {/* BUTTON BOOKING — DESKTOP ONLY */}
+          <div className="hidden lg:flex justify-end">
+            <button
+              onClick={() => scrollToSection("paket")}
+              className="bg-[#CFAD48] text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-[#b89236] transition"
+            >
+              Booking Sekarang
+            </button>
+          </div>
+
+          {/* BURGER — MOBILE & TABLET */}
           <button
             className="lg:hidden"
             onClick={() => {
               setOpenMenu(true);
-              onMenuChange(true); // 🔥 KIRIM KE APP
+              onMenuChange(true);
             }}
           >
-            <svg className="w-8 h-8 text-[#525252]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <svg
+              className="w-8 h-8 text-[#525252]"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
               <path strokeLinecap="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
@@ -150,7 +187,11 @@ function Navbar({ onMenuChange }: NavbarProps) {
         }}
         className={`
           fixed inset-0 bg-black bg-opacity-30 z-40 transition-opacity duration-300 lg:hidden
-          ${openMenu ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
+          ${
+            openMenu
+              ? "opacity-100 pointer-events-auto"
+              : "opacity-0 pointer-events-none"
+          }
         `}
       />
 
@@ -169,18 +210,49 @@ function Navbar({ onMenuChange }: NavbarProps) {
               onMenuChange(false); // 🔥 KIRIM KE APP
             }}
           >
-            <svg className="w-7 h-7 text-[#525252]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <svg
+              className="w-7 h-7 text-[#525252]"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
               <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
 
         <nav className="flex flex-col gap-3 px-6">
-          <button onClick={() => scrollToSection("beranda")} className={sidebarStyle("beranda")}>Beranda</button>
-          <button onClick={() => scrollToSection("tentang")} className={sidebarStyle("tentang")}>Tentang Kami</button>
-          <button onClick={() => scrollToSection("paket")} className={sidebarStyle("paket")}>Paket</button>
-          <button onClick={() => scrollToSection("fasilitas")} className={sidebarStyle("fasilitas")}>Fasilitas</button>
-          <button onClick={() => scrollToSection("galeri")} className={sidebarStyle("galeri")}>Galeri</button>
+          <button
+            onClick={() => scrollToSection("beranda")}
+            className={sidebarStyle("beranda")}
+          >
+            Beranda
+          </button>
+          <button
+            onClick={() => scrollToSection("tentang")}
+            className={sidebarStyle("tentang")}
+          >
+            Tentang Kami
+          </button>
+          <button
+            onClick={() => scrollToSection("paket")}
+            className={sidebarStyle("paket")}
+          >
+            Paket
+          </button>
+          <button
+            onClick={() => scrollToSection("fasilitas")}
+            className={sidebarStyle("fasilitas")}
+          >
+            Fasilitas
+          </button>
+          <button
+            onClick={() => scrollToSection("galeri")}
+            className={sidebarStyle("galeri")}
+          >
+            Galeri
+          </button>
 
           <button
             onClick={() => scrollToSection("paket")}

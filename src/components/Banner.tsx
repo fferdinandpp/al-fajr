@@ -1,23 +1,29 @@
 import Banner from "../assets/img/Banner.png";
-import BannerMobile from "../assets/img/BannerMobile.png";
 
 function App() {
   return (
     <div className="w-full h-[100dvh] relative overflow-hidden">
 
-      {/* DESKTOP BACKGROUND */}
+      {/* BACKGROUND */}
       <div
-        className="hidden sm:block absolute inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${Banner})` }}
       />
 
-      {/* MOBILE BACKGROUND */}
+      {/* BADGE — No. 1 di Indonesia */}
       <div
-        className="block sm:hidden absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${BannerMobile})` }}
-      />
+        className="
+          absolute top-[120px] left-[40px]
+          bg-[#393939] text-[#FFC265]
+          px-6 py-2 rounded-full font-semibold
+          shadow-lg text-sm md:text-base
+          z-20
+        "
+      >
+        No. 1 Di Indonesia
+      </div>
 
-      {/* CONTENT (NO MARGIN / NO PADDING TOP) */}
+      {/* CONTENT */}
       <div className="
         relative z-10 
         h-full 

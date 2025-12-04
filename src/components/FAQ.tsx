@@ -13,11 +13,21 @@ function FAQ() {
   const [faq, setFaq] = useState<FAQItem[]>([]);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
+  // STATE LOADING + ERROR
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
   useEffect(() => {
     axios
       .get("https://adminside.alfajrumroh.co.id/api/faq")
-      .then((res) => setFaq(res.data.data))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        setFaq(res.data.data);
+        setError(false);
+      })
+      .catch(() => {
+        setError(true); // API ERROR
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   const toggle = (i: number) => {
@@ -35,34 +45,51 @@ function FAQ() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-5 justify-center items-center pb-10">
-        {faq.map((item, i) => (
-          <div
-            key={item.id}
-            className="
-              border border-black rounded-xl w-2/3 p-5
-              md:w-4/5 
-              max-sm:w-full max-sm:p-5 max-sm:text-base
-            "
-          >
-            <div
-              className="flex items-center justify-between cursor-pointer"
-              onClick={() => toggle(i)}
-            >
-              <h3 className="max-sm:text-base">{item.pertanyaan}</h3>
-              <FontAwesomeIcon
-                icon={openIndex === i ? faChevronUp : faChevronDown}
-              />
-            </div>
+      {/* LOADING STATE */}
+      {loading && (
+        <p className="text-center text-gray-500 italic py-10">
+          Memuat pertanyaan...
+        </p>
+      )}
 
-            {openIndex === i && (
-              <p className="text-xs max-sm:text-sm text-justify text-[#454545] pt-5 whitespace-pre-line leading-relaxed">
-                {item.jawaban}
-              </p>
-            )}
-          </div>
-        ))}
-      </div>
+      {/* ERROR STATE (API MATI) */}
+      {error && !loading && (
+        <p className="text-center text-red-500 font-semibold py-10">
+          Gagal memuat pertanyaan. Silakan coba lagi nanti.
+        </p>
+      )}
+
+      {/* DATA FAQ */}
+      {!loading && !error && (
+        <div className="flex flex-col gap-5 justify-center items-center pb-10">
+          {faq.map((item, i) => (
+            <div
+              key={item.id}
+              className="
+                border border-black rounded-xl w-2/3 p-5
+                md:w-4/5 
+                max-sm:w-full max-sm:p-5 max-sm:text-base
+              "
+            >
+              <div
+                className="flex items-center justify-between cursor-pointer"
+                onClick={() => toggle(i)}
+              >
+                <h3 className="max-sm:text-base">{item.pertanyaan}</h3>
+                <FontAwesomeIcon
+                  icon={openIndex === i ? faChevronUp : faChevronDown}
+                />
+              </div>
+
+              {openIndex === i && (
+                <p className="text-xs max-sm:text-sm text-justify text-[#454545] pt-5 whitespace-pre-line leading-relaxed">
+                  {item.jawaban}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

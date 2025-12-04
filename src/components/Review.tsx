@@ -12,12 +12,13 @@ function App() {
         "
         style={{ backgroundImage: `url(${Review})` }}
       >
-        {/* TITLE + SUBTITLE */}
-        <div className="text-white">
+        {/* TITLE + SUBTITLE (SELALU TENGAH) */}
+        <div className="text-white text-center">
+          
           <h1
             className="
               text-4xl font-extrabold pb-5 
-              sm:text-2xl sm:text-center
+              sm:text-2xl
             "
           >
             Testimoni dari Jamaah Kami
@@ -25,9 +26,8 @@ function App() {
 
           <p
             className="
-              w-1/3 pb-10 
-              md:w-1/2 
-              max-sm:w-full max-sm:text-center max-sm:text-sm max-sm:px-1
+              max-w-2xl mx-auto pb-10
+              text-base max-sm:text-sm px-2
             "
           >
             Kami sudah bersama 500.000+ Jamaah, inilah testimoni dari Jamaah
@@ -52,6 +52,7 @@ function App() {
                 max-sm:w-full max-sm:p-4
               "
             >
+              {/* NAMA (tetap tengah) */}
               <h3
                 className="
                   text-center font-extrabold pb-2 
@@ -61,9 +62,11 @@ function App() {
                 Haji Gus Ghofur Chan
               </h3>
 
+              {/* REVIEW (TIDAK rata tengah) */}
               <p
                 className="
-                  text-xs sm:text-[11px] sm:text-center leading-relaxed
+                  text-xs sm:text-[11px] leading-relaxed 
+                  text-left
                 "
               >
                 ”Saya sangat berterimakasih kepada Al-Fajr Travelindo yang sangat
@@ -74,7 +77,7 @@ function App() {
           ))}
         </div>
 
-        {/* FOOTER TEXT */}
+        {/* FOOTER TEXT (SELALU TENGAH) */}
         <div
           className="
             text-white text-2xl font-extrabold text-center
