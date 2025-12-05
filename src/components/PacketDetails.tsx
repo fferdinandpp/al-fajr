@@ -80,16 +80,12 @@ export default function PacketDetails() {
           <img
             src={paket.gambar_url}
             alt="Poster Paket"
-            className="
-      w-full h-[260px] md:h-[320px] lg:h-[380px]
-      object-cover object-center
-      rounded-lg shadow-lg
-    "
+            className="w-full h-[260px] md:h-[320px] lg:h-[380px] object-cover object-center rounded-lg shadow-lg"
           />
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row justify-center items-center gap-6 pb-10">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-6 pb-10 mt-14">
         <button
           onClick={openItinerary}
           className="
