@@ -61,12 +61,11 @@ function FAQ() {
           {faq.map((item, i) => (
             <div
               key={item.id}
-              className="
-                border border-black rounded-xl w-2/3 p-5
-                md:w-4/5 
-                max-sm:w-full max-sm:p-5 max-sm:text-base
-              "
+              className="border border-black rounded-xl w-2/3 p-5
+                         md:w-4/5 
+                         max-sm:w-full max-sm:p-5 max-sm:text-base"
             >
+              {/* Header Pertanyaan */}
               <div
                 className="flex items-center justify-between cursor-pointer"
                 onClick={() => toggle(i)}
@@ -74,14 +73,24 @@ function FAQ() {
                 <h3 className="max-sm:text-base">{item.pertanyaan}</h3>
                 <FontAwesomeIcon
                   icon={openIndex === i ? faChevronUp : faChevronDown}
+                  className={`transition-transform duration-300 ${
+                    openIndex === i ? "rotate-180" : ""
+                  }`}
                 />
               </div>
 
-              {openIndex === i && (
-                <p className="text-xs max-sm:text-sm text-justify text-[#454545] pt-5 whitespace-pre-line leading-relaxed">
+              {/* Jawaban dengan animasi */}
+              <div
+                className={`transition-all duration-300 overflow-hidden ${
+                  openIndex === i
+                    ? "max-h-96 opacity-100 pt-5"
+                    : "max-h-0 opacity-0"
+                }`}
+              >
+                <p className="text-xs max-sm:text-sm text-justify text-[#454545] whitespace-pre-line leading-relaxed">
                   {item.jawaban}
                 </p>
-              )}
+              </div>
             </div>
           ))}
         </div>
