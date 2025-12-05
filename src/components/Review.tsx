@@ -12,9 +12,7 @@ function App() {
         "
         style={{ backgroundImage: `url(${Review})` }}
       >
-        {/* TITLE + SUBTITLE (SELALU TENGAH) */}
         <div className="text-white text-center">
-          
           <h1
             className="
               text-4xl font-extrabold pb-5 
@@ -35,7 +33,6 @@ function App() {
           </p>
         </div>
 
-        {/* TESTIMONI GRID */}
         <div
           className="
             flex flex-wrap justify-center gap-5 pb-10
@@ -52,7 +49,6 @@ function App() {
                 max-sm:w-full max-sm:p-4
               "
             >
-              {/* NAMA (tetap tengah) */}
               <h3
                 className="
                   text-center font-extrabold pb-2 
@@ -62,29 +58,27 @@ function App() {
                 Haji Gus Ghofur Chan
               </h3>
 
-              {/* REVIEW (TIDAK rata tengah) */}
               <p
                 className="
                   text-xs sm:text-[11px] leading-relaxed 
                   text-left
                 "
               >
-                ”Saya sangat berterimakasih kepada Al-Fajr Travelindo yang sangat
-                profesional dalam membimbing kami selama ibadah Haji Plus di Tanah
-                Suci.”
+                ”Saya sangat berterimakasih kepada Al-Fajr Travelindo yang
+                sangat profesional dalam membimbing kami selama ibadah Haji Plus
+                di Tanah Suci.”
               </p>
             </div>
           ))}
         </div>
 
-        {/* FOOTER TEXT (SELALU TENGAH) */}
         <div
           className="
             text-white text-2xl font-extrabold text-center
             sm:text-lg sm:px-2
           "
         >
-          Testimoni adalah bagian dari perjalanan kami untuk terus 
+          Testimoni adalah bagian dari perjalanan kami untuk terus
           <br className="sm:hidden" />
           tumbuh dan menjadi yang lebih baik dari kemarin.
         </div>

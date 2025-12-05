@@ -41,8 +41,6 @@ function Packet() {
   return (
     <>
       <div className="w-full p-6 md:p-10 lg:p-12 bg-[#EEEEEE]">
-
-        {/* HEADER */}
         <div className="flex flex-col items-center text-center text-[#4A4A4A]">
           <h1 className="w-full md:w-2/3 lg:w-1/3 text-2xl md:text-3xl lg:text-4xl font-extrabold pb-3 md:pb-5">
             Paket Umrah dan Haji Plus Al-Fajr Travelindo
@@ -52,21 +50,18 @@ function Packet() {
           </p>
         </div>
 
-        {/* LOADING */}
         {loading && (
           <p className="text-gray-600 text-lg text-center py-10">
             Memuat paket...
           </p>
         )}
 
-        {/* ERROR API */}
         {!loading && error && (
           <p className="text-red-500 text-center font-semibold py-10">
             Gagal memuat paket. Silakan coba lagi nanti.
           </p>
         )}
 
-        {/* CARD LIST */}
         {!loading && !error && (
           <div className="flex flex-wrap justify-center gap-8 md:gap-12 lg:gap-16 pb-10">
             {pakets.map((item) => (
@@ -79,14 +74,12 @@ function Packet() {
                   gap-2
                 "
               >
-                {/* GAMBAR */}
                 <img
                   src={item.gambar_url}
                   className="w-full h-48 md:h-56 object-cover rounded-lg pb-3 md:pb-5"
                   alt={item.nama_paket}
                 />
 
-                {/* TIPE & LABEL */}
                 <div className="flex justify-between pb-2">
                   <p className="text-[#E2D798] font-semibold text-base md:text-lg">
                     {item.kategori}
@@ -96,53 +89,49 @@ function Packet() {
                   </p>
                 </div>
 
-                {/* NAMA PAKET */}
                 <h3 className="font-extrabold text-base md:text-lg text-white">
                   {item.nama_paket}
                 </h3>
 
-                {/* HARGA */}
                 <h3 className="font-extrabold text-xl md:text-2xl text-white">
                   Rp {item.harga_tampil.toLocaleString("id-ID")}/ orang
                 </h3>
 
-                {/* DETAIL KONTEN */}
                 <div className="flex flex-col gap-3 pb-4 md:pb-5">
-
-                  {/* Maskapai */}
                   <div className="flex items-center gap-3">
                     <div className="bg-[#FFC265] w-fit p-2 rounded-lg">
-                      <img src={Mascapai} className="w-5 md:w-6" alt="Maskapai" />
+                      <img
+                        src={Mascapai}
+                        className="w-5 md:w-6"
+                        alt="Point 1"
+                      />
                     </div>
                     <p className="text-[#E2D798] text-sm md:text-base">
                       {item.maskapai}
                     </p>
                   </div>
 
-                  {/* Durasi */}
                   <div className="flex items-center gap-3">
                     <div className="bg-[#FFC265] w-fit p-2 rounded-lg">
-                      <img src={Sleep} className="w-5 md:w-6" alt="Durasi" />
+                      <img src={Sleep} className="w-5 md:w-6" alt="Point 2" />
                     </div>
                     <p className="text-[#E2D798] text-sm md:text-base">
                       Durasi {item.durasi_paket} hari
                     </p>
                   </div>
 
-                  {/* Kota */}
                   <div className="flex items-center gap-3">
                     <div className="bg-[#FFC265] w-fit p-2 rounded-lg">
-                      <img src={Buildings} className="w-5 md:w-6" alt="Kota" />
+                      <img src={Buildings} className="w-5 md:w-6" alt="Point 3" />
                     </div>
                     <p className="text-[#E2D798] text-sm md:text-base">
                       {item.kota_keberangkatan}
                     </p>
                   </div>
 
-                  {/* Bandara */}
                   <div className="flex items-center gap-3">
                     <div className="bg-[#FFC265] w-fit p-2 rounded-lg">
-                      <img src={Airport} className="w-5 md:w-6" alt="Bandara" />
+                      <img src={Airport} className="w-5 md:w-6" alt="Point 4" />
                     </div>
                     <p className="text-[#E2D798] text-sm md:text-base">
                       {item.bandara_keberangkatan}
@@ -150,7 +139,6 @@ function Packet() {
                   </div>
                 </div>
 
-                {/* BUTTONS */}
                 <div className="flex flex-col text-center items-end gap-3">
                   <a
                     href={`https://wa.me/6281234567890?text=Saya ingin mendaftar paket ${encodeURIComponent(
@@ -175,12 +163,11 @@ function Packet() {
           </div>
         )}
 
-        {/* FOOTER TEXT */}
         <div className="text-lg md:text-xl lg:text-2xl text-center font-semibold leading-relaxed">
-          Yuk, segera daftarkan diri Anda bersama keluarga,<br className="hidden md:block" />
+          Yuk, segera daftarkan diri Anda bersama keluarga,
+          <br className="hidden md:block" />
           dan percayakan AlFajr Travelindo sebagai pendamping ibadah Anda.
         </div>
-
       </div>
     </>
   );

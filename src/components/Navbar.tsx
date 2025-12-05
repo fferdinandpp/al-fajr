@@ -12,12 +12,10 @@ function Navbar({ onMenuChange }: NavbarProps) {
 
   const [openMenu, setOpenMenu] = useState(false);
 
-  // PREMIUM ANIMATION STATES
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  // Scroll Spy
   const [activeSection, setActiveSection] = useState("");
 
   const scrollToSection = (id: string) => {
@@ -34,7 +32,6 @@ function Navbar({ onMenuChange }: NavbarProps) {
     }
   };
 
-  // PREMIUM NAVBAR ANIMATION
   useEffect(() => {
     const handleScroll = () => {
       const current = window.scrollY;
@@ -54,7 +51,6 @@ function Navbar({ onMenuChange }: NavbarProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  // Scroll Spy (premium)
   useEffect(() => {
     const sections = ["beranda", "tentang", "paket", "fasilitas", "galeri"];
     const observer = new IntersectionObserver(
@@ -74,13 +70,9 @@ function Navbar({ onMenuChange }: NavbarProps) {
     return () => observer.disconnect();
   }, []);
 
-  // DESKTOP style
   const navStyle = (id: string) =>
-    `transition ${
-      activeSection === id ? "text-[#B6942F] font-bold" : "text-[#525252]"
-    }`;
+    `transition ${activeSection === id ? "text-[#B6942F]" : "text-[#525252]"}`;
 
-  // SIDEBAR style
   const sidebarStyle = (id: string) =>
     `
     w-full text-left py-3 px-4 rounded-lg transition 
@@ -93,28 +85,23 @@ function Navbar({ onMenuChange }: NavbarProps) {
 
   return (
     <>
-      {/* NAVBAR */}
       <div
         className={`
-    fixed top-0 left-0 w-full z-50
-    transition-all duration-300 ease-out
-    ${isHidden ? "-translate-y-full" : "translate-y-0"}
-    ${
-      isScrolled
-        ? "backdrop-blur-xl bg-white/70 shadow-lg h-16"
-        : "bg-white h-20 shadow-none"
-    }
-  `}
+          fixed top-0 left-0 w-full z-50
+          transition-all duration-300 ease-out
+          ${isHidden ? "-translate-y-full" : "translate-y-0"}
+          ${
+            isScrolled
+              ? "backdrop-blur-xl bg-white/70 shadow-lg h-16"
+              : "bg-white h-20 shadow-none"
+          }
+        `}
       >
-        {/* FLEX untuk mobile & tablet, GRID untuk desktop */}
-        <div
-          className="px-6 lg:px-20 flex items-center justify-between h-full lg:grid lg:grid-cols-3">
-          {/* LOGO */}
+        <div className="px-6 lg:px-20 flex items-center justify-between h-full lg:grid lg:grid-cols-3">
           <img src={Logo} className="h-12 md:h-14" alt="Logo" />
 
-          {/* MENU TENGAH — DESKTOP ONLY */}
-          <div className="hidden lg:flex justify-center">
-            <div className="flex gap-7">
+          <div className="hidden lg:flex justify-center text-sm">
+            <div className="flex gap-6">
               <button
                 onClick={() => scrollToSection("beranda")}
                 className={navStyle("beranda")}
@@ -158,7 +145,6 @@ function Navbar({ onMenuChange }: NavbarProps) {
             </button>
           </div>
 
-          {/* BURGER — MOBILE & TABLET */}
           <button
             className="lg:hidden"
             onClick={() => {
@@ -179,11 +165,10 @@ function Navbar({ onMenuChange }: NavbarProps) {
         </div>
       </div>
 
-      {/* OVERLAY */}
       <div
         onClick={() => {
           setOpenMenu(false);
-          onMenuChange(false); // 🔥 KIRIM KE APP
+          onMenuChange(false);
         }}
         className={`
           fixed inset-0 bg-black bg-opacity-30 z-40 transition-opacity duration-300 lg:hidden
@@ -195,7 +180,6 @@ function Navbar({ onMenuChange }: NavbarProps) {
         `}
       />
 
-      {/* SIDEBAR */}
       <div
         className={`
           fixed top-0 right-0 h-full w-72 bg-white shadow-xl z-50
@@ -207,7 +191,7 @@ function Navbar({ onMenuChange }: NavbarProps) {
           <button
             onClick={() => {
               setOpenMenu(false);
-              onMenuChange(false); // 🔥 KIRIM KE APP
+              onMenuChange(false);
             }}
           >
             <svg

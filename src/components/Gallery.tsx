@@ -23,7 +23,6 @@ function App() {
     );
   };
 
-  // PHOTO SLIDER (MOBILE)
   const photos = [Gallery, Gallery, Gallery, Gallery, Gallery];
   const [photoIndex, setPhotoIndex] = useState(0);
   const photoRef = useRef<HTMLDivElement | null>(null);
@@ -40,7 +39,6 @@ function App() {
   return (
     <>
       <div className="bg-[#FFF2CC] px-20 py-10 md:px-10 sm:px-5 sm:py-8 overflow-hidden">
-        {/* TITLE */}
         <div className="text-center text-[#4A4A4A] pb-7">
           <h1 className="text-3xl font-extrabold pb-2 sm:text-2xl">
             Dokumentasi Bersama Al-Fajr
@@ -51,7 +49,6 @@ function App() {
           </p>
         </div>
 
-        {/* VIDEO SECTION */}
         <div className="flex flex-col items-center pb-10">
           <h3 className="font-semibold text-2xl pb-5 sm:text-xl">Video</h3>
 
@@ -86,11 +83,9 @@ function App() {
           </div>
         </div>
 
-        {/* PHOTO SECTION */}
         <div className="flex flex-col items-center">
           <h3 className="font-semibold text-2xl pb-5 sm:text-xl">Foto</h3>
 
-          {/* MOBILE SLIDER */}
           <div className="block sm:hidden w-full overflow-hidden">
             <div
               ref={photoRef}
@@ -111,7 +106,6 @@ function App() {
               ))}
             </div>
 
-            {/* DOTS */}
             <div className="flex justify-center mt-2 space-x-2">
               {photos.map((_, i) => (
                 <div
@@ -129,16 +123,7 @@ function App() {
             </div>
           </div>
 
-          {/* DESKTOP GRID (ASIMETRIS SEPERTI GAMBAR) */}
-          {/* DESKTOP GRID (Premium Layout) */}
-          <div
-            className="
-    hidden sm:grid 
-    grid-cols-3 gap-6 
-    w-full max-w-6xl
-  "
-          >
-            {/* KOLOM KIRI – FOTO BESAR */}
+          <div className="hidden sm:grid grid-cols-3 gap-6 w-full max-w-6xl">
             <div className="col-span-1 flex">
               <img
                 src={photos[0]}
@@ -147,7 +132,6 @@ function App() {
               />
             </div>
 
-            {/* KOLOM KANAN – 4 FOTO KECIL */}
             <div className="col-span-2 grid grid-cols-2 gap-6">
               <img
                 src={photos[1]}
@@ -172,7 +156,6 @@ function App() {
             </div>
           </div>
 
-          {/* BUTTON SHOW ALL – DESKTOP */}
           <div className="hidden sm:flex w-full max-w-6xl justify-end mt-3">
             <button className="bg-[#1DA599] text-white px-4 py-2 rounded-lg shadow text-sm font-semibold">
               Show all photos

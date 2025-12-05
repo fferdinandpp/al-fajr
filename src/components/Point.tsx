@@ -7,45 +7,38 @@ function App() {
   return (
     <>
       <div className="w-full h-fit p-6 md:p-10 lg:p-12 flex flex-col justify-center items-center bg-gradient-to-br from-[#FFF4D5] via-[#D4CBB0] to-[#999380]">
-
-        {/* TITLE */}
         <div className="text-center text-[#4A4A4A] w-full md:w-2/3 lg:w-1/3">
           <h1 className="text-2xl md:text-3xl font-extrabold pb-4 md:pb-5">
             Mengapa AlFajr Travelindo dibanding travel yang lain?
           </h1>
           <p className="pb-8 md:pb-10 text-sm md:text-base">
-            Karena kepercayaan jamaah adalah prioritas kami untuk selalu memberikan yang terbaik
+            Karena kepercayaan jamaah adalah prioritas kami untuk selalu
+            memberikan yang terbaik
           </p>
         </div>
 
-        {/* CARD WRAPPER */}
         <div className="flex flex-wrap justify-center gap-8 md:gap-10 lg:gap-14 w-full">
-
           {[
             {
               icon: Point1,
               title: "Paket Umroh Beragam & Fleksibel",
-              desc:
-                "Alfajr menyediakan paket Umroh Reguler, Umroh Plus (Turki, Dubai, Malaysia, Singapura), hingga Umroh Ramadhan. Tersedia juga program Super Ekonomis 23jt all-in dan Super Joss 24jt tanpa transit."
+              desc: "Alfajr menyediakan paket Umroh Reguler, Umroh Plus (Turki, Dubai, Malaysia, Singapura), hingga Umroh Ramadhan. Tersedia juga program Super Ekonomis 23jt all-in dan Super Joss 24jt tanpa transit.",
             },
             {
               icon: Point2,
               title: "Layanan Umroh Private (Custom)",
-              desc:
-                "Jamaah dapat menentukan sendiri durasi keberangkatan, pilihan hotel, maskapai, tour leader, bahkan muthowif. Semua dapat disesuaikan dengan kebutuhan keluarga atau rombongan."
+              desc: "Jamaah dapat menentukan sendiri durasi keberangkatan, pilihan hotel, maskapai, tour leader, bahkan muthowif. Semua dapat disesuaikan dengan kebutuhan keluarga atau rombongan.",
             },
             {
               icon: Point3,
               title: "Pembimbing Sesuai Syariat",
-              desc:
-                "Dibimbing oleh tour leader dan muthowif profesional dengan latar pendidikan dari Timur Tengah seperti Al-Azhar Mesir, Sudan, Maroko, Saudi Arabia (UIM & Ummul Quro). Ibadah lebih tenang dan terarah."
+              desc: "Dibimbing oleh tour leader dan muthowif profesional dengan latar pendidikan dari Timur Tengah seperti Al-Azhar Mesir, Sudan, Maroko, Saudi Arabia (UIM & Ummul Quro). Ibadah lebih tenang dan terarah.",
             },
             {
               icon: Point4,
               title: "Tercepat & Memiliki Jaringan Luas",
-              desc:
-                "Memiliki kantor operasional di Solo, Jakarta, Tangerang, Jogja, serta lebih dari 13 mitra di berbagai kota besar. Jamaah dari seluruh Indonesia mudah mendapatkan pelayanan resmi dan terpercaya."
-            }
+              desc: "Memiliki kantor operasional di Solo, Jakarta, Tangerang, Jogja, serta lebih dari 13 mitra di berbagai kota besar. Jamaah dari seluruh Indonesia mudah mendapatkan pelayanan resmi dan terpercaya.",
+            },
           ].map((item, i) => (
             <div
               key={i}
@@ -61,12 +54,9 @@ function App() {
 
               <h3 className="font-bold text-lg md:text-xl">{item.title}</h3>
 
-              <p className="text-xs md:text-sm leading-relaxed">
-                {item.desc}
-              </p>
+              <p className="text-xs md:text-sm leading-relaxed">{item.desc}</p>
             </div>
           ))}
-
         </div>
       </div>
     </>

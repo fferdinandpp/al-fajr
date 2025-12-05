@@ -8,7 +8,6 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Fungsi scroll universal (dipakai navbar & footer)
   const scrollToSection = (id: string) => {
     if (location.pathname !== "/") {
       navigate("/");
@@ -26,12 +25,10 @@ function App() {
         className="bg-[#5C584C] text-white px-20 pt-10 pb-5 
                       max-sm:px-6 max-sm:pt-8"
       >
-        {/* WRAPPER */}
         <div
           className="flex gap-28 pb-5 
                         max-sm:flex-col max-sm:gap-10 max-sm:pb-8"
         >
-          {/* ================= COLUMN 1 ================= */}
           <div className="max-sm:text-center max-sm:flex max-sm:flex-col max-sm:items-center">
             <img
               src={Logo}
@@ -45,7 +42,6 @@ function App() {
               Pelayanan No. 1 di Indonesia
             </p>
 
-            {/* SOCIAL MEDIA MODERN GRID */}
             <div className="flex flex-col gap-3 w-full max-w-xs max-sm:mx-auto">
               <a
                 href="https://www.instagram.com/alfajrumroh/"
@@ -91,20 +87,14 @@ function App() {
             </div>
           </div>
 
-          {/* ================= COLUMN 2 (NAVIGASI SCROLLABLE) ================= */}
           <div
-            className="
-    flex flex-col gap-2
-
-    text-left                /* force left always */
-    sm:text-left
-    md:text-left
-    lg:text-left
-    xl:text-left
-
-    max-sm:text-center       /* only mobile */
-    max-sm:items-center
-  "
+            className="flex flex-col gap-2 text-left
+            sm:text-left
+            md:text-left
+            lg:text-left
+            xl:text-left
+            max-sm:text-center
+            max-sm:items-center"
           >
             <h3 className="pb-3 text-xl font-bold">Navigasi</h3>
 
@@ -137,7 +127,6 @@ function App() {
             </button>
           </div>
 
-          {/* ================= COLUMN 3 ================= */}
           <div className="flex flex-col gap-4 max-sm:text-center max-sm:items-center max-sm:px-3">
             <h3 className="pb-3 text-xl font-bold">Lokasi Kami</h3>
 
@@ -160,7 +149,6 @@ function App() {
           </div>
         </div>
 
-        {/* Divider */}
         <div className="bg-white/40 h-[1px] w-full"></div>
 
         <p className="pt-5 text-sm max-sm:text-center text-gray-200 leading-relaxed">

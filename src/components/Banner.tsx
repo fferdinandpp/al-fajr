@@ -3,14 +3,11 @@ import Banner from "../assets/img/Banner.png";
 function App() {
   return (
     <div className="w-full h-[100dvh] relative overflow-hidden">
-
-      {/* BACKGROUND */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${Banner})` }}
       />
 
-      {/* BADGE — No. 1 di Indonesia */}
       <div
         className="
           absolute top-[120px] left-[40px]
@@ -23,14 +20,15 @@ function App() {
         No. 1 Di Indonesia
       </div>
 
-      {/* CONTENT */}
-      <div className="
+      <div
+        className="
         relative z-10 
         h-full 
         flex flex-col justify-center items-center 
         text-center text-[#3F3F3F] gap-5
         px-4 w-[90%] max-w-[450px] mx-auto
-      ">
+      "
+      >
         <h1 className="text-3xl md:text-4xl font-extrabold leading-snug">
           Berangkat Umroh Lebih Mudah, Aman, dan Nyaman Bersama Alfajr
         </h1>

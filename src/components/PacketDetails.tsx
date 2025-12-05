@@ -71,7 +71,6 @@ export default function PacketDetails() {
       "
       style={{ backgroundImage: `url(${Background})` }}
     >
-      {/* Title */}
       <div className="text-center">
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold pb-6">
           {paket.nama_paket}
@@ -90,9 +89,7 @@ export default function PacketDetails() {
         </div>
       </div>
 
-      {/* BUTTONS */}
       <div className="flex flex-col md:flex-row justify-center items-center gap-6 pb-10">
-        {/* Itinerary */}
         <button
           onClick={openItinerary}
           className="
@@ -106,7 +103,6 @@ export default function PacketDetails() {
           <img src={ItenaryIcon} alt="Itenary" />
         </button>
 
-        {/* Daftar */}
         <button
           onClick={daftarSekarang}
           className="
@@ -118,7 +114,6 @@ export default function PacketDetails() {
           Daftar Sekarang
         </button>
 
-        {/* Flyer (same as poster) */}
         <a
           href={paket.gambar_url}
           target="_blank"
@@ -134,7 +129,6 @@ export default function PacketDetails() {
         </a>
       </div>
 
-      {/* INFORMASI DETAIL */}
       <div className="text-center">
         <div className="bg-white h-[1px] w-full my-10 opacity-50"></div>
 

@@ -18,30 +18,21 @@ function App() {
         "
         style={{ backgroundImage: `url(${Background})` }}
       >
-        {/* OVERLAY GELAP */}
         <div className="absolute inset-0 bg-black/50"></div>
 
-        {/* CONTENT WRAPPER (agar muncul di atas overlay) */}
         <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-start justify-center gap-10 md:gap-16 lg:gap-24 w-full">
-          {/* LOGO */}
-          <div className="
-  flex 
-  justify-center 
-  lg:justify-center 
-  self-center            /* ⭐ membuat logo rata tengah secara vertikal */
-  w-full lg:w-auto
-">
-  <img 
-    src={Logo} 
-    className="bg-white rounded-3xl p-5 w-48 md:w-64 lg:w-[400px]"  /* dibesarkan */
-    alt="Logo" 
-  />
-</div>
+          <div
+            className="flex justify-center lg:justify-center self-center w-full lg:w-auto"
+          >
+            <img
+              src={Logo}
+              className="bg-white rounded-3xl p-5 w-48 md:w-64 lg:w-[400px]" /* dibesarkan */
+              alt="Logo"
+            />
+          </div>
 
-          {/* VERTICAL LINE */}
           <div className="hidden lg:block w-[2px] bg-white"></div>
 
-          {/* CONTENT */}
           <div className="w-full lg:w-1/2 text-white">
             <h1 className="text-center text-2xl md:text-3xl lg:text-4xl font-extrabold pb-5">
               Profil Perusahaan
@@ -80,9 +71,7 @@ function App() {
               Legalitas Kami
             </h2>
 
-            {/* LEGAL CARDS */}
             <div className="flex flex-col md:flex-row items-center gap-5">
-              {/* Card 1 — IZIN UMROH */}
               <a
                 href="https://drive.google.com/file/d/1ha9QaBCvJUjXX9eDsURBT7HjffyQClhS/view"
                 target="_blank"
@@ -91,21 +80,19 @@ function App() {
                   flex items-center justify-center gap-3 
                   bg-[#174623] border-2 border-[#7C7C7C] rounded-md 
                   w-full md:w-1/2 py-3 cursor-pointer hover:scale-[1.03] 
-                  transition-transform duration-300
-                "
+                  transition-transform duration-300"
               >
                 <img src={Legal} className="w-8 md:w-10" alt="Legal" />
                 <div>
-                  <p className="text-xs md:text-sm text-white">
+                  <p className="text-xs text-white">
                     IZIN UMROH (PPIU) KEMENAG RI
                   </p>
-                  <p className="text-[#CACF2C] text-xs md:text-sm">
+                  <p className="text-[#CACF2C] text-xs">
                     Klik untuk melihat dokumen
                   </p>
                 </div>
               </a>
 
-              {/* Card 2 — AKREDITASI */}
               <a
                 href="https://drive.google.com/file/d/1eQTMgzpHcx3O2vh62UGsG_43z1JPeu7m/view"
                 target="_blank"
@@ -114,15 +101,14 @@ function App() {
                   flex items-center justify-center gap-3 
                   bg-[#174623] border-2 border-[#7C7C7C] rounded-md 
                   w-full md:w-1/2 py-3 cursor-pointer hover:scale-[1.03]
-                  transition-transform duration-300
-                "
+                  transition-transform duration-300"
               >
                 <img src={Legal} className="w-8 md:w-10" alt="Legal" />
                 <div>
-                  <p className="text-xs md:text-sm text-white">
+                  <p className="text-xs text-white">
                     AKREDITASI RESMI KEMENAG RI
                   </p>
-                  <p className="text-[#CACF2C] text-xs md:text-sm">
+                  <p className="text-[#CACF2C] text-xs">
                     Klik untuk melihat dokumen
                   </p>
                 </div>

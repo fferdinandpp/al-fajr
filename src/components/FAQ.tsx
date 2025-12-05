@@ -13,7 +13,6 @@ function FAQ() {
   const [faq, setFaq] = useState<FAQItem[]>([]);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  // STATE LOADING + ERROR
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -25,7 +24,7 @@ function FAQ() {
         setError(false);
       })
       .catch(() => {
-        setError(true); // API ERROR
+        setError(true);
       })
       .finally(() => setLoading(false));
   }, []);
@@ -45,21 +44,18 @@ function FAQ() {
         </p>
       </div>
 
-      {/* LOADING STATE */}
       {loading && (
         <p className="text-center text-gray-500 italic py-10">
           Memuat pertanyaan...
         </p>
       )}
 
-      {/* ERROR STATE (API MATI) */}
       {error && !loading && (
         <p className="text-center text-red-500 font-semibold py-10">
           Gagal memuat pertanyaan. Silakan coba lagi nanti.
         </p>
       )}
 
-      {/* DATA FAQ */}
       {!loading && !error && (
         <div className="flex flex-col gap-5 justify-center items-center pb-10">
           {faq.map((item, i) => (

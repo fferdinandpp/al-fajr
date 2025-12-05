@@ -44,7 +44,11 @@ function FloatingContact({ hidden }: { hidden: boolean }) {
         hover:scale-105 hover:shadow-2xl
         transition-all duration-300
 
-        ${hidden ? "opacity-0 translate-x-10 pointer-events-none" : "opacity-100 translate-x-0"}
+        ${
+          hidden
+            ? "opacity-0 translate-x-10 pointer-events-none"
+            : "opacity-100 translate-x-0"
+        }
       `}
     >
       <img src={WAIcon} className="w-7 h-7" />

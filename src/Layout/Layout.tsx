@@ -14,7 +14,6 @@ function Layout() {
       <Outlet />
       <Footer />
 
-      {/* kirim "hidden" ke floating button */}
       <FloatingContact hidden={sidebarOpen} />
     </>
   );
