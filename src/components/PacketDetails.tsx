@@ -175,408 +175,15 @@
 // }
 
 
-
-// import { useEffect, useState } from "react";
-// import { useSearchParams } from "react-router-dom";
-
-// // Aset (Pastikan path ini sesuai project Anda)
-// import Background from "../assets/img/BGDetailPaket.png";
-// import ItenaryIcon from "../assets/icons/Itenary.png";
-// import FlyerIcon from "../assets/icons/Flyer.png";
-
-// // --- 1. INTERFACES ---
-
-// interface DaftarHarga {
-//   tipe: string;
-//   label: string;
-//   harga: string;
-// }
-
-// interface AkomodasiItem {
-//   kota: string;
-//   nama_hotel: string;
-//   bintang: string;
-//   jarak: string;
-//   gambar: string | null;
-// }
-
-// interface PaketDetail {
-//   id: number;
-//   judul: string;
-//   nama_paket: string;
-//   kategori: string;
-//   maskapai: string;
-//   deskripsi: string;
-//   jadwal_keberangkatan: string;
-//   durasi_paket: string;
-//   bandara_keberangkatan: string;
-//   kota_keberangkatan: string;
-//   rute_penerbangan: string;
-//   status_paket: string;
-//   gambar_url: string;
-//   itinerary_url: string | null;
-//   harga_tampil: number;
-//   daftar_harga: DaftarHarga[];
-//   akomodasi: AkomodasiItem[];
-//   harga_termasuk: string[];
-//   harga_tidak_termasuk: string[];
-// }
-
-// // --- KOMPONEN IKON HOTEL (SVG) ---
-// const HotelIcon = () => (
-//   <svg
-//     xmlns="http://www.w3.org/2000/svg"
-//     className="w-8 h-8 text-[#FFC265]"
-//     viewBox="0 0 24 24"
-//     fill="currentColor"
-//   >
-//     <path d="M19 7h-8v6h8V7zm2-4H3c-1.1 0-2 .9-2 2v14h2v-2h18v2h2V5c0-1.1-.9-2-2-2zm0 12H3V5h18v10z" />
-//   </svg>
-// );
-
-// export default function PacketDetails() {
-//   const [params] = useSearchParams();
-//   const id = params.get("id");
-
-//   const [paket, setPaket] = useState<PaketDetail | null>(null);
-//   // PERBAIKAN 1: Default true, agar tidak perlu setState di awal useEffect
-//   const [loading, setLoading] = useState<boolean>(true);
-
-//   // --- FORMATTER HELPERS ---
-//   const formatRupiah = (angka: string | number) => {
-//     const val = typeof angka === "string" ? parseInt(angka) : angka;
-//     return new Intl.NumberFormat("id-ID", {
-//       style: "currency",
-//       currency: "IDR",
-//       minimumFractionDigits: 0,
-//     }).format(val);
-//   };
-
-//   const formatDate = (dateString: string) => {
-//     if (!dateString) return "-";
-//     const options: Intl.DateTimeFormatOptions = {
-//       day: "numeric",
-//       month: "long",
-//       year: "numeric",
-//     };
-//     return new Date(dateString).toLocaleDateString("id-ID", options);
-//   };
-
-//   const renderStars = (count: string) => {
-//     const num = parseInt(count) || 3;
-//     return Array(num).fill("⭐").join("");
-//   };
-
-//   useEffect(() => {
-//     if (!id) return;
-
-//     // PERBAIKAN 1: Bungkus dalam async function untuk menghindari synchronous state update error
-//     const fetchData = async () => {
-//       // Jika id berubah dan kita ingin memunculkan loading lagi,
-//       // kita set loading true DISINI (di dalam fungsi async), bukan di root useEffect
-//       setLoading(true); 
-      
-//       try {
-//         const response = await fetch(
-//           `https://adminside.alfajrumroh.co.id/api/paket/${id}`
-//         );
-//         const json = await response.json();
-//         setPaket(json?.data ?? null);
-//       } catch (err) {
-//         console.log("Detail Paket Error:", err);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchData();
-//   }, [id]);
-
-//   // --- ACTIONS ---
-//   const openItinerary = () => {
-//     if (!paket?.itinerary_url) {
-//       alert("Itinerary belum tersedia");
-//       return;
-//     }
-//     window.open(paket.itinerary_url, "_blank");
-//   };
-
-//   const daftarSekarang = () => {
-//     if (!paket) return;
-//     const message = encodeURIComponent(
-//       `Halo, saya ingin mendaftar paket: ${paket.nama_paket} (${paket.jadwal_keberangkatan})`
-//     );
-//     window.open(`https://wa.me/6281385233145?text=${message}`, "_blank");
-//   };
-
-//   // --- RENDER LOADING ---
-//   if (loading)
-//     return (
-//       <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-//         <div className="flex flex-col items-center gap-4">
-//           <div className="loading loading-spinner loading-lg text-[#FFC265]"></div>
-//           <div className="text-xl animate-pulse">Memuat detail paket...</div>
-//         </div>
-//       </div>
-//     );
-
-//   if (!paket)
-//     return (
-//       <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-//         <div className="text-xl">Paket tidak ditemukan.</div>
-//       </div>
-//     );
-
-//   // --- MAIN RENDER ---
-//   return (
-//     <div
-//       className="min-h-screen bg-cover bg-center bg-fixed text-white font-sans"
-//       style={{ backgroundImage: `url(${Background})` }}
-//     >
-//       <div className="w-full min-h-screen bg-black/60 px-5 py-8 md:px-10 lg:px-20 pt-28 md:pt-32 lg:pt-36 backdrop-blur-sm">
-        
-//         {/* HEADER SECTION */}
-//         <div className="max-w-6xl mx-auto text-center mb-10">
-//           <span className="inline-block py-1 px-3 rounded-full bg-[#FFC265] text-black font-bold text-sm mb-4 uppercase">
-//             {paket.kategori} &bull; {paket.status_paket}
-//           </span>
-//           <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-2 text-[#FFC265]">
-//             {paket.nama_paket}
-//           </h1>
-//           <p className="text-xl md:text-2xl font-light text-gray-200 mb-8">
-//             {paket.deskripsi}
-//           </p>
-
-//           <div className="relative w-full max-w-3xl mx-auto group">
-//             <img
-//               src={paket.gambar_url}
-//               alt="Poster Paket"
-//               className="w-full h-auto max-h-[450px] object-cover rounded-2xl shadow-2xl border-2 border-white/20"
-//             />
-//           </div>
-//         </div>
-
-//         {/* BUTTONS */}
-//         <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-14">
-//           <button
-//             onClick={openItinerary}
-//             className="flex items-center gap-3 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 px-6 py-3 rounded-full transition-all w-full md:w-auto"
-//           >
-//             <img src={ItenaryIcon} alt="Icon" className="w-5 h-5" />
-//             <span className="font-bold">Download Itinerary</span>
-//           </button>
-
-//           <button
-//             onClick={daftarSekarang}
-//             className="bg-[#FFC265] text-black font-bold px-8 py-3 rounded-full shadow-[0_0_20px_rgba(255,194,101,0.5)] hover:scale-105 transition-transform w-full md:w-auto"
-//           >
-//             Daftar Sekarang
-//           </button>
-
-//           <a
-//             href={paket.gambar_url}
-//             target="_blank"
-//             rel="noreferrer"
-//             className="flex items-center gap-3 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 px-6 py-3 rounded-full transition-all w-full md:w-auto"
-//           >
-//             <img src={FlyerIcon} alt="Icon" className="w-5 h-5" />
-//             <span className="font-bold">Lihat Flyer</span>
-//           </a>
-//         </div>
-
-//         {/* GRID INFO UTAMA */}
-//         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
-//           <InfoCard
-//             label="Keberangkatan"
-//             value={formatDate(paket.jadwal_keberangkatan)}
-//           />
-//           <InfoCard label="Durasi" value={`${paket.durasi_paket} Hari`} />
-//           <InfoCard label="Maskapai" value={paket.maskapai} />
-//           <InfoCard
-//             label="Start From"
-//             value={formatRupiah(paket.harga_tampil)}
-//             highlight
-//           />
-//         </div>
-
-//         <Divider />
-
-//         {/* PRICING SECTION */}
-//         <div className="max-w-6xl mx-auto mb-14">
-//           <h2 className="text-2xl font-bold text-center mb-8 text-[#FFC265]">
-//             PILIHAN PAKET
-//           </h2>
-//           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-//             {paket.daftar_harga.map((item, idx) => (
-//               <div
-//                 key={idx}
-//                 className="bg-white/10 border border-white/20 p-6 rounded-xl text-center hover:bg-white/15 transition group"
-//               >
-//                 <h3 className="text-xl font-bold mb-1 group-hover:text-[#FFC265] transition-colors">
-//                   {item.tipe}
-//                 </h3>
-//                 <p className="text-sm text-gray-300 mb-4">{item.label}</p>
-//                 <div className="text-2xl font-extrabold text-[#FFC265]">
-//                   {formatRupiah(item.harga)}
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-
-//         <Divider />
-
-//         {/* FLIGHT INFO */}
-//         <div className="max-w-4xl mx-auto text-center mb-14 space-y-2">
-//           <h2 className="text-2xl font-bold mb-6">RUTE PENERBANGAN</h2>
-//           <div className="bg-white/5 border border-dashed border-white/30 p-6 rounded-xl inline-block w-full">
-//             <p className="text-lg md:text-xl tracking-widest font-mono font-bold text-[#FFC265]">
-//               {paket.rute_penerbangan}
-//             </p>
-//             <div className="mt-4 flex justify-between text-sm text-gray-400">
-//               <span>{paket.kota_keberangkatan}</span>
-//               <span>{paket.bandara_keberangkatan}</span>
-//             </div>
-//           </div>
-//         </div>
-
-//         <Divider />
-
-//         {/* HOTEL SECTION (PERBAIKAN 2: Desain Baru Tanpa Gambar) */}
-//         <div className="max-w-6xl mx-auto mb-14">
-//           <h2 className="text-2xl font-bold text-center mb-10">
-//             AKOMODASI HOTEL
-//           </h2>
-//           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center">
-//             {paket.akomodasi.length === 0 ? (
-//               <p className="text-center col-span-full">
-//                 Informasi hotel belum tersedia
-//               </p>
-//             ) : (
-//               paket.akomodasi.map((hotel, idx) => (
-//                 <div
-//                   key={idx}
-//                   className="flex items-center gap-5 bg-gradient-to-r from-white/10 to-white/5 border border-white/10 p-6 rounded-2xl hover:border-[#FFC265]/50 transition-all"
-//                 >
-//                   {/* Ikon Hotel sebagai pengganti gambar */}
-//                   <div className="bg-[#FFC265]/20 p-4 rounded-full flex-shrink-0">
-//                     <HotelIcon />
-//                   </div>
-
-//                   <div className="flex-1">
-//                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-1 mb-1">
-//                       <h3 className="text-xl font-bold text-[#FFC265]">
-//                         {hotel.nama_hotel}
-//                       </h3>
-//                       <span className="text-yellow-400 text-sm tracking-widest">
-//                         {renderStars(hotel.bintang)}
-//                       </span>
-//                     </div>
-                    
-//                     <div className="h-[1px] w-full bg-white/10 my-2"></div>
-                    
-//                     <div className="flex justify-between items-center text-sm text-gray-300">
-//                       <span className="font-semibold uppercase tracking-wide">
-//                         {hotel.kota}
-//                       </span>
-//                       <span className="bg-white/10 px-2 py-1 rounded text-xs">
-//                         Jarak: {hotel.jarak}
-//                       </span>
-//                     </div>
-//                   </div>
-//                 </div>
-//               ))
-//             )}
-//           </div>
-//         </div>
-
-//         <Divider />
-
-//         {/* INCLUDE / EXCLUDE */}
-//         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 mb-20">
-//           {/* Termasuk */}
-//           <div className="bg-white/5 p-6 rounded-2xl border-l-4 border-green-500">
-//             <h3 className="text-xl font-bold mb-4 text-green-400 border-b border-green-500/30 pb-2">
-//               HARGA TERMASUK
-//             </h3>
-//             <ul className="space-y-3">
-//               {paket.harga_termasuk.map((item, i) => (
-//                 <li
-//                   key={i}
-//                   className="flex items-start gap-3 text-sm md:text-base text-gray-200"
-//                 >
-//                   <span className="mt-1 text-green-400 font-bold">✓</span>
-//                   <span>{item}</span>
-//                 </li>
-//               ))}
-//             </ul>
-//           </div>
-
-//           {/* Tidak Termasuk */}
-//           <div className="bg-white/5 p-6 rounded-2xl border-l-4 border-red-500">
-//             <h3 className="text-xl font-bold mb-4 text-red-400 border-b border-red-500/30 pb-2">
-//               HARGA TIDAK TERMASUK
-//             </h3>
-//             <ul className="space-y-3">
-//               {paket.harga_tidak_termasuk.map((item, i) => (
-//                 <li
-//                   key={i}
-//                   className="flex items-start gap-3 text-sm md:text-base text-gray-200"
-//                 >
-//                   <span className="mt-1 text-red-400 font-bold">✕</span>
-//                   <span>{item}</span>
-//                 </li>
-//               ))}
-//             </ul>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// // --- SUB COMPONENTS ---
-
-// const Divider = () => (
-//   <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent my-10"></div>
-// );
-
-// const InfoCard = ({
-//   label,
-//   value,
-//   highlight = false,
-// }: {
-//   label: string;
-//   value: string;
-//   highlight?: boolean;
-// }) => (
-//   <div
-//     className={`p-4 rounded-xl border ${
-//       highlight
-//         ? "bg-[#FFC265]/20 border-[#FFC265]"
-//         : "bg-white/5 border-white/10"
-//     }`}
-//   >
-//     <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">
-//       {label}
-//     </p>
-//     <p
-//       className={`font-bold ${
-//         highlight ? "text-[#FFC265] text-xl" : "text-white text-lg"
-//       }`}
-//     >
-//       {value}
-//     </p>
-//   </div>
-// );
-
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
+// Aset (Pastikan path sesuai)
 import Background from "../assets/img/BGDetailPaket.png";
 import ItenaryIcon from "../assets/icons/Itenary.png";
 import FlyerIcon from "../assets/icons/Flyer.png";
 
+// --- INTERFACES ---
 interface DaftarHarga {
   tipe: string;
   label: string;
@@ -633,8 +240,12 @@ const CrossIcon = () => (
 export default function PacketDetails() {
   const [params] = useSearchParams();
   const id = params.get("id");
+  
   const [paket, setPaket] = useState<PaketDetail | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  
+  // State untuk Nomor Marketing
+  const [marketingPhone, setMarketingPhone] = useState<string>("");
 
   // --- HELPERS ---
   const formatRupiah = (angka: string | number) => {
@@ -647,6 +258,7 @@ export default function PacketDetails() {
     return new Date(dateString).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
   };
 
+  // --- FETCH DATA PAKET ---
   useEffect(() => {
     if (!id) return;
     const fetchData = async () => {
@@ -664,10 +276,32 @@ export default function PacketDetails() {
     fetchData();
   }, [id]);
 
+  // --- FETCH DATA MARKETING (Baru) ---
+  useEffect(() => {
+    fetch("https://adminside.alfajrumroh.co.id/api/marketing-current")
+      .then((res) => res.json())
+      .then((json) => {
+        const data = json?.data;
+        if (!data?.phone_number) return;
+        
+        // Simpan hanya angkanya saja (sanitize)
+        setMarketingPhone(data.phone_number.replace(/\D/g, ""));
+      })
+      .catch((err) => console.log("Marketing API Error:", err));
+  }, []);
+
+  // --- ACTIONS ---
   const daftarSekarang = () => {
     if (!paket) return;
+
+    // Cek apakah nomor marketing sudah ter-load
+    if (!marketingPhone) {
+      alert("Mohon tunggu sebentar, sedang memuat kontak marketing...");
+      return;
+    }
+
     const message = encodeURIComponent(`Halo, saya tertarik paket: ${paket.nama_paket}`);
-    window.open(`https://wa.me/6281385233145?text=${message}`, "_blank");
+    window.open(`https://wa.me/${marketingPhone}?text=${message}`, "_blank");
   };
 
   const openItinerary = () => paket?.itinerary_url && window.open(paket.itinerary_url, "_blank");
@@ -677,7 +311,7 @@ export default function PacketDetails() {
 
   return (
     <div className="min-h-screen bg-[#1a1a1a] text-gray-200 font-sans pb-20">
-      {/* Background Banner (Header Tipis) */}
+      {/* Background Banner */}
       <div 
         className="h-[35vh] w-full bg-cover bg-center relative"
         style={{ backgroundImage: `url(${Background})` }}
@@ -685,7 +319,7 @@ export default function PacketDetails() {
          <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-[#1a1a1a]"></div>
       </div>
 
-      {/* Main Content Container - Naik ke atas banner (Negative Margin) */}
+      {/* Main Content Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32 relative z-10">
         
         <div className="flex flex-col lg:flex-row gap-8">
