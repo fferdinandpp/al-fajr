@@ -18,7 +18,6 @@ function FloatingContact({ hidden }: { hidden: boolean }) {
 
         setMarketing({
           name: data.name,
-          // Simpan data apa adanya dulu, formatting dilakukan saat klik
           phone: data.phone_number || "", 
         });
       })

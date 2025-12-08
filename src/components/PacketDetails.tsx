@@ -182,7 +182,6 @@ import Background from "../assets/img/BGDetailPaket.png";
 import ItenaryIcon from "../assets/icons/Itenary.png";
 import FlyerIcon from "../assets/icons/Flyer.png";
 
-// --- INTERFACES ---
 interface MarketingData {
   name: string;
   phone: string;
@@ -247,11 +246,7 @@ export default function PacketDetails() {
   
   const [paket, setPaket] = useState<PaketDetail | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  
-  // State untuk Data Marketing
   const [marketing, setMarketing] = useState<MarketingData | null>(null);
-
-  // --- HELPERS ---
   const formatRupiah = (angka: string | number) => {
     const val = typeof angka === "string" ? parseInt(angka) : angka;
     return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(val);
@@ -279,8 +274,6 @@ export default function PacketDetails() {
     };
     fetchData();
   }, [id]);
-
-  // --- FETCH DATA MARKETING (LOGIKA BARU) ---
   useEffect(() => {
     fetch("https://adminside.alfajrumroh.co.id/api/marketing-current")
       .then((res) => res.json())
@@ -288,7 +281,6 @@ export default function PacketDetails() {
         const data = json?.data;
         if (!data) return;
 
-        // Simpan data mentah dulu, pembersihan dilakukan saat klik
         setMarketing({
           name: data.name,
           phone: data.phone_number || "", 
@@ -296,8 +288,6 @@ export default function PacketDetails() {
       })
       .catch((err) => console.log("Marketing API Error:", err));
   }, []);
-
-  // --- ACTIONS ---
   const daftarSekarang = () => {
     if (!paket) return;
 
@@ -306,18 +296,13 @@ export default function PacketDetails() {
       return;
     }
 
-    // 1. Bersihkan karakter non-digit
     let cleanPhone = marketing.phone.replace(/\D/g, "");
-
-    // 2. Format Internasional (0 -> 62)
     if (cleanPhone.startsWith("0")) {
       cleanPhone = "62" + cleanPhone.substring(1);
     }
 
     const message = encodeURIComponent(`Halo, saya tertarik paket: ${paket.nama_paket} (${paket.jadwal_keberangkatan})`);
-    
-    // 3. Buka WA
-    window.open(`https://wa.me/${cleanPhone}?text=${message}`, "_blank");
+        window.open(`https://wa.me/${cleanPhone}?text=${message}`, "_blank");
   };
 
   const openItinerary = () => paket?.itinerary_url && window.open(paket.itinerary_url, "_blank");
@@ -327,24 +312,19 @@ export default function PacketDetails() {
 
   return (
     <div className="min-h-screen bg-[#1a1a1a] text-gray-200 font-sans pb-20">
-      {/* Background Banner */}
       <div 
         className="h-[35vh] w-full bg-cover bg-center relative"
         style={{ backgroundImage: `url(${Background})` }}
       >
          <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-[#1a1a1a]"></div>
       </div>
-
-      {/* Main Content Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32 relative z-10">
         
         <div className="flex flex-col lg:flex-row gap-8">
           
-          {/* --- LEFT COLUMN (STICKY SIDEBAR) --- */}
           <div className="w-full lg:w-[380px] flex-shrink-0">
             <div className="bg-[#252525] rounded-2xl shadow-2xl border border-gray-700 overflow-hidden lg:sticky lg:top-24">
               
-              {/* Image */}
               <div className="relative h-56 w-full">
                 <img src={paket.gambar_url} alt={paket.nama_paket} className="w-full h-full object-cover" />
                 <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-[#FFC265] border border-[#FFC265]/30">
@@ -352,7 +332,6 @@ export default function PacketDetails() {
                 </div>
               </div>
 
-              {/* Main Info Card */}
               <div className="p-6">
                 <h1 className="text-2xl font-bold text-white mb-2 leading-tight">{paket.nama_paket}</h1>
                 <div className="flex items-center gap-2 text-sm text-gray-400 mb-6">
@@ -400,11 +379,8 @@ export default function PacketDetails() {
               </div>
             </div>
           </div>
-
-          {/* --- RIGHT COLUMN (SCROLLABLE DETAILS) --- */}
           <div className="flex-1 space-y-6">
             
-            {/* Section: Deskripsi */}
             <div className="bg-[#252525] rounded-2xl p-6 border border-gray-700">
                 <h2 className="text-xl font-bold text-white mb-4">Tentang Paket</h2>
                 <p className="text-gray-400 leading-relaxed text-sm md:text-base">
@@ -413,7 +389,6 @@ export default function PacketDetails() {
                 </p>
             </div>
 
-            {/* Section: Pilihan Harga */}
             <div className="bg-[#252525] rounded-2xl p-6 border border-gray-700">
                 <h2 className="text-xl font-bold text-white mb-4">Pilihan Kamar</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -427,7 +402,6 @@ export default function PacketDetails() {
                 </div>
             </div>
 
-            {/* Section: Akomodasi */}
             <div className="bg-[#252525] rounded-2xl p-6 border border-gray-700">
                 <h2 className="text-xl font-bold text-white mb-4">Akomodasi Hotel</h2>
                 <div className="space-y-4">
@@ -451,7 +425,6 @@ export default function PacketDetails() {
                 </div>
             </div>
 
-            {/* Section: Include & Exclude */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="bg-[#252525] rounded-2xl p-6 border border-gray-700 h-full">
                     <h3 className="text-lg font-bold text-green-400 mb-4 pb-2 border-b border-gray-700">Termasuk</h3>
@@ -478,7 +451,6 @@ export default function PacketDetails() {
             </div>
 
           </div>
-          {/* End Right Column */}
 
         </div>
       </div>
