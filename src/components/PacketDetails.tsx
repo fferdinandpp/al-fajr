@@ -178,7 +178,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-// Aset (Pastikan path sesuai)
 import Background from "../assets/img/BGDetailPaket.png";
 import ItenaryIcon from "../assets/icons/Itenary.png";
 import FlyerIcon from "../assets/icons/Flyer.png";
