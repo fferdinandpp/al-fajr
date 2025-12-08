@@ -184,6 +184,11 @@ import ItenaryIcon from "../assets/icons/Itenary.png";
 import FlyerIcon from "../assets/icons/Flyer.png";
 
 // --- INTERFACES ---
+interface MarketingData {
+  name: string;
+  phone: string;
+}
+
 interface DaftarHarga {
   tipe: string;
   label: string;
@@ -244,8 +249,8 @@ export default function PacketDetails() {
   const [paket, setPaket] = useState<PaketDetail | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   
-  // State untuk Nomor Marketing
-  const [marketingPhone, setMarketingPhone] = useState<string>("");
+  // State untuk Data Marketing
+  const [marketing, setMarketing] = useState<MarketingData | null>(null);
 
   // --- HELPERS ---
   const formatRupiah = (angka: string | number) => {
@@ -276,16 +281,19 @@ export default function PacketDetails() {
     fetchData();
   }, [id]);
 
-  // --- FETCH DATA MARKETING (Baru) ---
+  // --- FETCH DATA MARKETING (LOGIKA BARU) ---
   useEffect(() => {
     fetch("https://adminside.alfajrumroh.co.id/api/marketing-current")
       .then((res) => res.json())
       .then((json) => {
         const data = json?.data;
-        if (!data?.phone_number) return;
-        
-        // Simpan hanya angkanya saja (sanitize)
-        setMarketingPhone(data.phone_number.replace(/\D/g, ""));
+        if (!data) return;
+
+        // Simpan data mentah dulu, pembersihan dilakukan saat klik
+        setMarketing({
+          name: data.name,
+          phone: data.phone_number || "", 
+        });
       })
       .catch((err) => console.log("Marketing API Error:", err));
   }, []);
@@ -294,14 +302,23 @@ export default function PacketDetails() {
   const daftarSekarang = () => {
     if (!paket) return;
 
-    // Cek apakah nomor marketing sudah ter-load
-    if (!marketingPhone) {
-      alert("Mohon tunggu sebentar, sedang memuat kontak marketing...");
+    if (!marketing?.phone) {
+      alert("Sedang memuat kontak marketing atau nomor tidak tersedia...");
       return;
     }
 
-    const message = encodeURIComponent(`Halo, saya tertarik paket: ${paket.nama_paket}`);
-    window.open(`https://wa.me/${marketingPhone}?text=${message}`, "_blank");
+    // 1. Bersihkan karakter non-digit
+    let cleanPhone = marketing.phone.replace(/\D/g, "");
+
+    // 2. Format Internasional (0 -> 62)
+    if (cleanPhone.startsWith("0")) {
+      cleanPhone = "62" + cleanPhone.substring(1);
+    }
+
+    const message = encodeURIComponent(`Halo, saya tertarik paket: ${paket.nama_paket} (${paket.jadwal_keberangkatan})`);
+    
+    // 3. Buka WA
+    window.open(`https://wa.me/${cleanPhone}?text=${message}`, "_blank");
   };
 
   const openItinerary = () => paket?.itinerary_url && window.open(paket.itinerary_url, "_blank");
@@ -397,7 +414,7 @@ export default function PacketDetails() {
                 </p>
             </div>
 
-            {/* Section: Pilihan Harga (Compact Grid) */}
+            {/* Section: Pilihan Harga */}
             <div className="bg-[#252525] rounded-2xl p-6 border border-gray-700">
                 <h2 className="text-xl font-bold text-white mb-4">Pilihan Kamar</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -411,7 +428,7 @@ export default function PacketDetails() {
                 </div>
             </div>
 
-            {/* Section: Akomodasi (Minimal List) */}
+            {/* Section: Akomodasi */}
             <div className="bg-[#252525] rounded-2xl p-6 border border-gray-700">
                 <h2 className="text-xl font-bold text-white mb-4">Akomodasi Hotel</h2>
                 <div className="space-y-4">
@@ -435,7 +452,7 @@ export default function PacketDetails() {
                 </div>
             </div>
 
-            {/* Section: Include & Exclude (Split Grid) */}
+            {/* Section: Include & Exclude */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="bg-[#252525] rounded-2xl p-6 border border-gray-700 h-full">
                     <h3 className="text-lg font-bold text-green-400 mb-4 pb-2 border-b border-gray-700">Termasuk</h3>

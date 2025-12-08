@@ -6,11 +6,15 @@ import Sleep from "../assets/icons/Sleep.png";
 import Buildings from "../assets/icons/Buildings.png";
 import Mascapai from "../assets/icons/Mascapai.png";
 
+interface MarketingData {
+  name: string;
+  phone: string;
+}
+
 interface PaketData {
   id: number;
   judul: string;
   nama_paket: string;
-  status_paket: string;
   kategori: string;
   maskapai: string;
   harga_tampil: number;
@@ -18,13 +22,18 @@ interface PaketData {
   kota_keberangkatan: string;
   bandara_keberangkatan: string;
   durasi_paket: string;
+  status_paket?: string;
 }
 
 function Packet() {
   const [pakets, setPakets] = useState<PaketData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-    const [marketingPhone, setMarketingPhone] = useState<string>("");
+  
+  // State untuk menyimpan data Marketing lengkap
+  const [marketing, setMarketing] = useState<MarketingData | null>(null);
+
+  // 1. Fetch Data Paket
   useEffect(() => {
     fetch("https://adminside.alfajrumroh.co.id/api/paket")
       .then((res) => res.json())
@@ -40,31 +49,44 @@ function Packet() {
       .finally(() => setLoading(false));
   }, []);
 
-  // 2. Fetch Data Marketing (WhatsApp)
+  // 2. Fetch Data Marketing (Logika Baru)
   useEffect(() => {
     fetch("https://adminside.alfajrumroh.co.id/api/marketing-current")
       .then((res) => res.json())
       .then((json) => {
         const data = json?.data;
-        if (data?.phone_number) {
-          setMarketingPhone(data.phone_number.replace(/\D/g, ""));
-        }
+        if (!data) return;
+
+        setMarketing({
+          name: data.name,
+          phone: data.phone_number || "", // Simpan apa adanya dulu
+        });
       })
       .catch((err) => console.log("Marketing API Error:", err));
   }, []);
 
+  // 3. Fungsi Handler Klik Daftar (Logika Pembersihan Nomor)
   const handleDaftar = (e: React.MouseEvent, namaPaket: string) => {
     e.preventDefault(); 
 
-    if (!marketingPhone) {
+    if (!marketing?.phone) {
       alert("Sedang memuat kontak marketing, mohon tunggu sebentar...");
       return;
     }
 
+    // Bersihkan nomor
+    let cleanPhone = marketing.phone.replace(/\D/g, "");
+
+    // Format Internasional (WA wajib 62 bukan 0)
+    if (cleanPhone.startsWith("0")) {
+      cleanPhone = "62" + cleanPhone.substring(1);
+    }
+
     const message = encodeURIComponent(
-      `Halo, saya ingin mendaftar paket ${namaPaket}`
+      `Halo, saya ingin mendaftar paket: ${namaPaket}`
     );
-    window.open(`https://wa.me/${marketingPhone}?text=${message}`, "_blank");
+    
+    window.open(`https://wa.me/${cleanPhone}?text=${message}`, "_blank");
   };
 
   return (
@@ -172,7 +194,7 @@ function Packet() {
                 </div>
 
                 <div className="flex flex-col text-center items-end gap-3 mt-auto">
-                  {/* BUTTON DAFTAR SEKARANG (Updated) */}
+                  {/* BUTTON DAFTAR SEKARANG */}
                   <button
                     onClick={(e) => handleDaftar(e, item.nama_paket)}
                     className="

@@ -18,7 +18,8 @@ function FloatingContact({ hidden }: { hidden: boolean }) {
 
         setMarketing({
           name: data.name,
-          phone: (data.phone_number || "").replace(/\D/g, ""),
+          // Simpan data apa adanya dulu, formatting dilakukan saat klik
+          phone: data.phone_number || "", 
         });
       })
       .catch((err) => console.log("API Error:", err));
@@ -29,7 +30,21 @@ function FloatingContact({ hidden }: { hidden: boolean }) {
       alert("Nomor WA tidak tersedia");
       return;
     }
-    window.open(`https://wa.me/${marketing.phone}`, "_blank");
+
+    // 1. Bersihkan karakter selain angka
+    let cleanPhone = marketing.phone.replace(/\D/g, "");
+
+    // 2. Ubah 0 di depan menjadi 62 (Format Internasional WA)
+    if (cleanPhone.startsWith("0")) {
+      cleanPhone = "62" + cleanPhone.substring(1);
+    }
+
+    // 3. Encode Pesan Default
+    const message = encodeURIComponent(
+      "Halo, saya ingin bertanya informasi mengenai paket Umroh Alfajr."
+    );
+
+    window.open(`https://wa.me/${cleanPhone}?text=${message}`, "_blank");
   };
 
   return (
@@ -51,14 +66,14 @@ function FloatingContact({ hidden }: { hidden: boolean }) {
         }
       `}
     >
-      <img src={WAIcon} className="w-7 h-7" />
+      <img src={WAIcon} className="w-7 h-7" alt="WhatsApp" />
 
       <div className="flex flex-col leading-tight">
         <p className="text-[11px] font-semibold text-[#525252]">
           Marketing Online
         </p>
         <p className="text-sm font-bold text-[#525252]">
-          {marketing?.name ?? ""}
+          {marketing?.name ?? "Admin"}
         </p>
       </div>
     </div>

@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <div
-        className="
+        className="-mt-7 lg:-mt-0
         relative
         w-full h-fit 
         p-6 md:p-12 lg:p-20 

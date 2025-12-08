@@ -50,7 +50,7 @@ function App() {
   };
 
   return (
-    <div className="w-full h-[100dvh] relative overflow-hidden">
+    <div className="w-full h-[92dvh] mt-[100px] lg:mt-20  relative overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${Banner})` }}
@@ -59,7 +59,7 @@ function App() {
       {/* Tag No. 1 */}
       <div
         className="
-          absolute top-[120px] left-[40px]
+          absolute top-[60px] left-[40px]
           bg-[#393939] text-[#FFC265]
           px-6 py-2 rounded-full font-semibold
           shadow-lg text-sm md:text-base
